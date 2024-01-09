@@ -1,0 +1,483 @@
+.whole-contained3 {
+  max-width: 1440px;
+  width: 90%;
+  height: 343px;
+  border-radius: 10px;
+  background-color: #f8f6f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  margin-top: 45px;
+}
+.nurse-testominal .line-contained {
+  display: none;
+}
+
+.testi-img1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: yellow; */
+}
+.testi-img1 img {
+  object-fit: contain;
+  width: 220px;
+  margin-top: -4%;
+  margin-bottom: 8px;
+}
+.testi-para1 p {
+  color: #4b5563;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.testimonial-container4 {
+  background-color: #f5f3ef;
+  display: flex;
+  justify-content: center;
+  /* align-items: center;
+  flex-direction: column; */
+  width: 100%;
+  height: 360px;
+  /* padding-top: 20px; */
+}
+.testi-heading3 {
+  margin-top: -30px;
+}
+.nurses-video {
+  width: 100%;
+  height: 624px;
+}
+.nurses-video img {
+  width: 100%;
+  height: 624px;
+  object-fit: cover;
+  z-index: -1;
+  position: absolute;
+  margin-top: 2.5%;
+}
+.nurses-video-cont {
+  width: 100%;
+  height: 624px;
+  display: flex;
+  justify-content: space-between;
+}
+.nurse-video-head {
+  width: 28%;
+  height: 624px;
+  display: flex;
+  align-items: start;
+  justify-content: end;
+}
+.nurses-flex {
+  width: 65%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.nurses-flex p {
+  font-size: 62px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  line-height: 40px;
+}
+.nurses-flex button {
+  width: 283px;
+  height: 66px;
+  background-color: rgba(174, 156, 127, 1);
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 2px 0px 15px 1px rgba(174, 156, 127, 1);
+  -webkit-box-shadow: 2px 0px 15px 1px rgba(174, 156, 127, 1);
+  -moz-box-shadow: 2px 0px 15px 1px rgba(174, 156, 127, 1);
+}
+.nurses-img {
+  height: 45%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.nurses-img img {
+  width: 288px;
+  height: 10px;
+}
+.nurses-img1 {
+  height: 45%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.nurses-img1 img {
+  width: 288px;
+  height: 10px;
+  object-fit: contain;
+}
+.nurses-img {
+  height: 45%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.nurses-img img {
+  width: 340px;
+  height: 10px;
+  object-fit: contain;
+  /* z-index: 2; */
+}
+
+.nurses-buttons {
+  height: 38%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 1250px) {
+  .nurses-img p {
+    font-size: 50px;
+  }
+  .nurses-img img {
+    width: 250px;
+  }
+  .nurses-img1 p {
+    font-size: 50px;
+  }
+  .nurses-img1 img {
+    width: 250px;
+  }
+  .nurses-buttons button {
+    width: 250px;
+  }
+}
+@media only screen and (max-width: 850px) {
+  .nurses-video-cont {
+    flex-direction: column;
+  }
+  .nurse-video-head {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+  }
+
+  .nurses-flex {
+    height: 100%;
+  }
+  .nurses-img {
+    align-items: center;
+  }
+  .nurses-img1 {
+    align-items: center;
+  }
+  .nurses-img1 img {
+    width: 190px;
+  }
+  .nurses-buttons {
+    align-items: center;
+    height: 35%;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .nurses-img p {
+    font-size: 40px;
+  }
+  .nurses-img img {
+    width: 200px;
+  }
+  .nurses-img1 p {
+    font-size: 40px;
+  }
+  .nurses-img1 img {
+    width: 150px;
+  }
+  .nurses-buttons button {
+    width: 100%;
+    height: 55px;
+  }
+  /* .nurses-buttons {
+    justify-content: space-evenly;
+  } */
+
+  .icon-box {
+    margin-bottom: 5px;
+  }
+}
+
+.loading-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+}
+
+.loading-overlay p {
+  margin-left: 10px;
+}
+
+.nurses-icons-main {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+}
+
+.nurses-icons {
+  width: 80%;
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.icon-box {
+  width: 310px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 250px;
+  justify-content: center;
+  transition: transform 0.3s;
+  cursor: pointer;
+  margin-bottom: 40px;
+  /* background-color: red; */
+}
+
+.icon-box {
+  /* Styles for non-blurred and non-hovered cards */
+  transition: filter 0.3s ease-in-out;
+}
+
+.icon-box.blur {
+  filter: blur(5px);
+}
+
+.icon-box:hover {
+  transform: scale(1.1);
+  filter: none;
+  /* color: #ae9c7f; */
+}
+
+.image-box {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.233);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.image-box img {
+  width: 60px;
+  height: 60px;
+}
+.text-box {
+  display: none;
+}
+.title-box p {
+  font-size: 21px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  color: rgba(24, 24, 27, 1);
+  line-height: 28px;
+  text-align: center;
+}
+.icon-box:hover .text-box {
+  display: block;
+}
+.icon-box:hover .title-box p,
+.icon-box:hover .text-box p {
+  color: #ae9c7f;
+}
+
+@media only screen and (max-width: 768px) {
+  .text-box {
+    display: block;
+  }
+}
+.text-box p {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(75, 85, 99, 1);
+  font-family: "Poppins", sans-serif;
+  line-height: 21px;
+  text-align: center;
+}
+.icon-box::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background-color: #ae9c7f;
+  /* background-color: red; */
+  z-index: -1;
+  transition: all 0.5s ease-out;
+}
+
+.icon-box:hover::before {
+  width: 300px; /* Adjust the size of the bubble as needed */
+  height: 300px;
+  margin: -150px; /* Half of the width and height to center the bubble */
+  opacity: 0;
+}
+.p-para1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: yellow; */
+  /* margin-left: 5%;
+  margin-right: 5%; */
+  margin-top: -10px;
+}
+.p-para1 p {
+  font-size: 18px;
+  line-height: 22px;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+@media only screen and (max-width: 1200px) {
+  .nurses-icons {
+    justify-content: space-evenly;
+  }
+}
+.centered-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+}
+.testimonial-container1 {
+  background-color: #f5f3ef;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 370px;
+}
+@media screen and (max-width: 1413px) {
+  .testimonial-container1 {
+    height: 370px;
+  }
+}
+@media screen and (min-width: 1080px) and (max-width: 1124px) {
+  .testimonial-container1 {
+    height: 390px !important;
+  }
+}
+@media screen and (min-width: 514px) and (max-width: 534px) {
+  .testimonial-container1 {
+    height: 470px !important;
+  }
+}
+@media screen and (min-width: 387px) and (max-width: 401px) {
+  .testimonial-container1 {
+    height: 510px !important;
+  }
+}
+@media screen and (max-width: 326px) {
+  .testimonial-container1 {
+    height: 530px !important;
+  }
+}
+@media screen and (max-width: 1079px) {
+  .testimonial-container1 {
+    height: 380px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .testimonial-container1 {
+    height: 440px;
+  }
+}
+@media screen and (max-width: 513px) {
+  .testimonial-container1 {
+    height: 470px;
+  }
+}
+@media screen and (max-width: 386px) {
+  .testimonial-container1 {
+    height: 510px;
+  }
+}
+@media screen and (min-width: 1441px) {
+  .nurses-video img {
+    object-fit: fill;
+  }
+}
+@media screen and (max-width: 750px) {
+  .nurses-video {
+    width: 100%;
+  }
+  .nurses-video img {
+    /* height: auto; */
+    width: 100%;
+  }
+  .nurses-img1 {
+    height: 45%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+  }
+  .nurses-img1 img {
+    width: 188px;
+    height: 10px;
+    object-fit: contain;
+  }
+  .nurses-img {
+    height: 45%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+  }
+  .nurses-img img {
+    width: 240px;
+    height: 10px;
+    object-fit: contain;
+  }
+}
+@media screen and (max-width: 600px) {
+  .nurses-video img {
+    object-position: 70%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .nurses-img1 img {
+    width: 150px;
+    height: 10px;
+    object-fit: contain;
+  }
+  .nurses-img img {
+    width: 210px;
+  }
+}

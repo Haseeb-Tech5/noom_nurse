@@ -1,0 +1,508 @@
+.blog-container-full {
+  max-width: 1440px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  /* background-color: red; */
+}
+
+.whole-Container {
+  background-color: #f5f3ef;
+  /* background-color: yellow; */
+  width: 100%;
+  height: auto;
+  /* padding-top: 2px; */
+  display: flex;
+  justify-content: center;
+  margin-top: -35px;
+}
+.blog-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.blog {
+  font-size: 40px;
+  font-weight: 600;
+  color: #000000;
+  font-family: "Poppins", sans-serif;
+  margin-top: 40px;
+}
+.blog-image-container {
+  margin-top: -15px;
+}
+.blog-image-container img {
+  width: 123px;
+  /* height: 10px; */
+  border-radius: 10px;
+  object-fit: cover;
+}
+.blog-img-cont {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+}
+.blog-cards-cont {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.blog-card {
+  width: 48%;
+  height: 570px;
+  background-color: rgb(253, 253, 253);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+}
+.blog-cards {
+  width: 45%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.blog-card1 {
+  height: 240px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border-radius: 15px;
+}
+.blog-cardd {
+  display: flex;
+  width: 95%;
+  align-items: center;
+}
+.card-blog1 {
+  width: 90%;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.blog-card-img {
+  width: 100%;
+  height: 280px;
+}
+.blog-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* background-color: red; */
+}
+
+.blog-card-head p {
+  font-family: "Poppins", sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 30px;
+}
+.blog-card-text p {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+}
+.blog-card-button button {
+  width: 308px;
+  height: 55px;
+  border-radius: 10px;
+  background-color: rgba(174, 156, 127, 1);
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  border: none;
+}
+.blog-card-img2 {
+  width: 230px;
+  height: 210px;
+}
+.blog-card-img2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.blog-card-head2 p {
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+}
+.blog-card-text2 {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: "Poppins", sans-serif;
+}
+
+.blog-card-button2 button {
+  width: 80%;
+  height: 44px;
+  background-color: rgba(174, 156, 127, 1);
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  border-radius: 10px;
+  border: none;
+}
+.card-logo {
+  width: 98px;
+  height: 31px;
+  border-radius: 8px;
+  background-color: rgba(73, 115, 103, 0.1);
+  display: flex;
+  justify-content: center;
+}
+.card-logo p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+  font-family: "Poppins", sans-serif;
+}
+
+.card-flex {
+  height: 88%;
+  width: 70%;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media screen and (min-width: 320px) and (max-width: 900px) {
+  .whole-Container {
+    height: auto;
+  }
+
+  .blog-container {
+    margin: 10px;
+  }
+
+  .blog-img-cont {
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .blog-cards-cont {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .blog-card,
+  .blog-cards {
+    width: 70%;
+    margin-bottom: 20px;
+  }
+
+  .blog-card-button {
+    display: flex;
+    justify-content: center;
+  }
+  .blog-card-button button {
+    width: 90%;
+  }
+
+  .blog-card1,
+  .blog-cardd {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .card-flex {
+    width: 100%;
+  }
+
+  .blog-card-button2 {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
+  .blog-card-button2 button {
+    width: 90%;
+    height: 50px !important;
+  }
+
+  .card-flex {
+    margin-left: 0;
+  }
+  .blog-card-img2 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media only screen and (max-width: 1090px) {
+  .blog-card-head2 p {
+    font-size: 17px !important;
+    line-height: 20px;
+  }
+  .blog-card-text2 p {
+    font-size: 15px;
+  }
+  .blog-card-button2 button {
+    height: 40px;
+    font-size: 18px !important;
+  }
+}
+@media only screen and (max-width: 670px) {
+  .blog-card-img {
+    margin-top: 20px;
+  }
+}
+@media only screen and (max-width: 720px) {
+  .blog-card,
+  .blog-cards {
+    width: 90%;
+
+    padding-bottom: 20px;
+  }
+  .card-flex {
+    padding-bottom: 20px;
+  }
+}
+@media only screen and (max-width: 380px) {
+  .blog-card-head p {
+    font-size: 21px;
+    line-height: 30px;
+    width: 95%;
+  }
+  .blog-card-text p {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  /* .blog-card-head2 {
+    font-size: 20px;
+    line-height: 26px;
+    width: 70%;
+  } */
+  /* .blog-card-text2 p {
+    font-size: 18px;
+    line-height: 22px;
+  } */
+}
+.blog-card {
+  position: relative;
+}
+
+.blog-card-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-logo2 {
+  position: absolute;
+  top: 0px;
+  left: 1px;
+  width: 98px;
+  height: 31px;
+  border-radius: 6px;
+  background-color: #eff6ff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2px;
+}
+.card-logo2 p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+  font-family: "Poppins", sans-serif;
+}
+
+.card-logo {
+  width: 98px;
+  height: 31px;
+  border-radius: 8px;
+  background-color: rgba(73, 115, 103, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+.card-logo p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+  font-family: "Poppins", sans-serif;
+  margin-top: 3%;
+}
+@media only screen and (max-width: 400px) {
+  .blog-card-img2 {
+    height: 150px;
+    margin-top: 10px;
+  }
+  .blog-card1 {
+    height: 380px !important;
+  }
+}
+@media only screen and (max-width: 382px) {
+  .blog-card-img2 {
+    /* height: 150px; */
+    margin-top: 30px;
+  }
+}
+@media only screen and (max-width: 659px) {
+  .blog-card-head {
+    margin-top: 20px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .card-logo {
+    margin-top: 4% !important;
+    margin-bottom: 4% !important;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .blog-card1 {
+    height: 430px;
+  }
+  .card-logo {
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+  .blog-card-button button {
+    width: 100%;
+  }
+  .blog-card-button2 button {
+    width: 100%;
+  }
+  .blog-card,
+  .blog-cards {
+    width: 90%;
+
+    padding-bottom: 20px;
+  }
+  .card-flex {
+    padding-bottom: 20px;
+  }
+  .blog-card-img {
+    width: 100%;
+  }
+  .blog-card-img img {
+    object-fit: cover;
+  }
+}
+@media only screen and (max-width: 1400px) {
+  .card-logo2 {
+    left: 0px;
+    top: 6px;
+  }
+}
+@media only screen and (max-width: 1312px) {
+  .card-logo2 {
+    top: 12px;
+  }
+}
+@media only screen and (max-width: 1244px) {
+  .card-logo2 {
+    top: 18px;
+  }
+}
+@media only screen and (max-width: 1230px) {
+  .card-logo2 {
+    top: 25px;
+  }
+}
+@media only screen and (max-width: 1156px) {
+  .card-logo2 {
+    top: 25px;
+  }
+}
+@media only screen and (max-width: 1140px) {
+  .card-logo2 {
+    top: 13px;
+  }
+}
+@media only screen and (max-width: 1040px) {
+  .card-logo2 {
+    top: 23px;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .card-logo2 {
+    top: 0px;
+    left: 5px;
+  }
+}
+@media only screen and (max-width: 850px) {
+  .card-logo2 {
+    top: 5px;
+    left: 0px;
+  }
+}
+@media only screen and (max-width: 788px) {
+  .card-logo2 {
+    top: 18px;
+    left: 0px;
+  }
+}
+@media only screen and (max-width: 720px) {
+  .card-logo2 {
+    top: 0px;
+    left: 45px;
+  }
+}
+@media only screen and (max-width: 711px) {
+  .card-logo2 {
+    top: 0px;
+    left: 40px;
+  }
+}
+@media only screen and (max-width: 697px) {
+  .card-logo2 {
+    top: 0px;
+    left: 35px;
+  }
+}
+@media only screen and (max-width: 697px) {
+  .card-logo2 {
+    top: 0px;
+    left: 30px;
+  }
+}
+@media only screen and (max-width: 673px) {
+  .card-logo2 {
+    top: 0px;
+    left: 25px;
+  }
+}
+@media only screen and (max-width: 667px) {
+  .card-logo2 {
+    top: 0px;
+    left: 20px;
+  }
+}
+@media only screen and (max-width: 631px) {
+  .card-logo2 {
+    top: 0px;
+    left: 5px;
+  }
+}
+@media only screen and (max-width: 591px) {
+  .card-logo2 {
+    top: 7px;
+    left: 0px;
+  }
+}
+@media only screen and (max-width: 555px) {
+  .card-logo2 {
+    top: 15px;
+    left: 0px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .whole-Container {
+    padding-bottom: 25px;
+  }
+}

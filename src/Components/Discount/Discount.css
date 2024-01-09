@@ -1,0 +1,255 @@
+.discount-container-full {
+  max-width: 1440px;
+  align-items: center;
+  display: flex;
+}
+.discount-container {
+  width: 100%;
+  display: flex;
+  height: 577px;
+}
+.back-video {
+  width: 100%;
+  height: 577px;
+  object-fit: cover;
+  border-radius: 10px;
+  position: absolute;
+  border-radius: 0px;
+  opacity: 0.3;
+}
+.left-discount {
+  /* background-color: red; */
+  display: flex;
+  flex: 1;
+  /* height: 100%; */
+  height: 400px;
+  width: 55%;
+  justify-content: center;
+  align-items: center;
+  color: rgb(0, 0, 0);
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  /* background-color: red; */
+}
+.right-discount {
+  /* background-color: yellow; */
+  display: flex;
+  width: 45%;
+  height: 100%;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+}
+.discount-img {
+  width: 10%;
+}
+.discount-img img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+.discount-heading {
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+}
+.discount-heading h2 {
+  font-size: 40px;
+  line-height: 50px;
+}
+.discount-para {
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  width: 85%;
+}
+.discount-para p {
+  font-size: 20px;
+  color: #222222;
+  line-height: 24px;
+}
+.discount-button {
+  width: 40%;
+}
+.discount-button button {
+  width: 262px;
+  height: 61px;
+  background-color: rgba(174, 156, 127, 1);
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  border-radius: 10px;
+  border: none;
+  line-height: 30px;
+}
+@media screen and (max-width: 1301px) {
+  .discount-heading h2 {
+    font-size: 39px;
+  }
+}
+/* @media screen and (max-width: 1269px) {
+  .discount-heading h2 {
+    font-size: 38px;
+  }
+}
+@media screen and (max-width: 1065px) {
+  .discount-heading h2 {
+    font-size: 32px;
+  }
+} */
+.nurse-para2 p {
+  font-size: 20px;
+  color: rgba(34, 34, 34, 1);
+  line-height: 24px;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+}
+.nurse-para2 {
+  width: 80%;
+}
+@media screen and (max-width: 1290px) {
+  .nurse-para2 p {
+    font-size: 18px !important;
+  }
+  .nurse-para2 {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .nurse-para {
+    width: 100%;
+    height: auto;
+  }
+  .left-discount {
+    font-size: 30px;
+    /* background-color: red; */
+  }
+}
+@media screen and (max-width: 999px) {
+  .discount-container-full {
+    flex-direction: column-reverse;
+    height: auto;
+    /* margin-bottom: 30%; */
+  }
+  .back-video {
+    /* height: 100%; */
+    object-fit: cover;
+    height: 650px;
+  }
+  .left-discount {
+    /* background-color: red; */
+    /* height: 600px; */
+  }
+  .discount-container {
+    height: 650px;
+  }
+  .discount-container-full {
+    justify-content: space-between;
+  }
+  /* .discount-container {
+    height: auto;
+  } */
+  .nurse-left {
+    width: 90%;
+    align-items: center;
+    padding-left: 0px;
+    margin-bottom: 30px;
+  }
+  .nurse-heading {
+    text-align: center;
+  }
+  .nurse-para2 p {
+    text-align: center;
+  }
+  .nurse-button {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+}
+/* @media screen and (max-width: 740px) {
+  .left-discount {
+    padding-top: 110px;
+  }
+}
+@media screen and (max-width: 660px) {
+  .left-discount {
+    font-size: 26px;
+    padding-top: 0px;
+    text-align: center;
+  }
+  .nurse-para2 {
+    width: 100%;
+  }
+  .nurse-left {
+    width: 87%;
+  }
+
+  .back-video {
+    height: 700px;
+  }
+  .discount-container-full {
+    margin-bottom: 30px;
+  }
+}
+*/
+@media screen and (max-width: 590px) {
+  .nurse-para2 p {
+    font-size: 15px !important;
+    line-height: 18px;
+  }
+  .back-video {
+    height: 600px;
+  }
+  .left-discount {
+    /* background-color: red; */
+    /* height: 600px; */
+  }
+  .discount-container {
+    height: 600px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .back-video {
+    height: 650px;
+  }
+  .left-discount {
+    /* background-color: red; */
+    /* height: 600px; */
+  }
+  .discount-container {
+    height: 650px;
+  }
+}
+@media screen and (min-width: 601px) {
+  .video-gap1 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .back-video {
+    display: none;
+  }
+  .video-gap1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 650px;
+    opacity: 0.3;
+    position: absolute;
+  }
+
+  .video-gap1 img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+@media screen and (min-width: 401px) and (max-width: 590px) {
+  .video-gap1 {
+    height: 600px;
+  }
+}
