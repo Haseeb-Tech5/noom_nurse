@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./Discount.css";
-import Video1 from "../Discount/video.mp4";
+// import Video1 from "../Discount/video.mp4";
+import Video1 from "../Discount/video-compress-again.mp4";
 import Tooth from "../../Assetss/tooth.png";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button } from "react-bootstrap";
 import { animateScroll as scroll } from "react-scroll";
-import yourGif from "../Discount/ezgif.gif";
+import yourGif from "../Discount/ezgif copy.gif";
 import axios from "axios";
 import imgg from "../../Components/Discount/video-0.jpg";
+import discount from "../../Assetss/discount.jpeg";
 
 const Data = [
   { animation: "fadeInFromLeft", text: "Efficiency" },
@@ -28,6 +30,7 @@ const Data = [
 const Discount = () => {
   const [counter, setCounter] = React.useState(0);
   const [data, setData] = React.useState(Data[0]);
+  const [showImage, setShowImage] = useState(true);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -43,10 +46,7 @@ const Discount = () => {
   const scrollToTop = () => {
     scroll.scrollToTop();
   };
-  const [videoError, setVideoError] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const handleVideoError = () => setVideoError(true);
-  const handleVideoLoaded = () => setVideoLoaded(true);
+
   const [showForm, setShowForm] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -89,38 +89,31 @@ const Discount = () => {
 
     if (validateForm()) {
       try {
-        console.log("Submitting form data:", formData);
+        const response = await fetch("http://localhost:5000/send-email", {
+          method: "POST",
+          body: JSON.stringify({
+            to: formData.email,
+            subject: "nomadnurse.co.uk",
+            text: `Name: ${formData.name}, Role: ${formData.role}.`,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await response.json();
+        setSubmitMessage(data.message);
 
-        const response = await axios.post(
-          "/contact.php", // Updated to relative path due to the proxy configuration
-          {
-            subject: formData.name,
-            message: formData.message,
-          },
-          {
-            withCredentials: true,
-          }
-        );
-
-        console.log("Server response:", response);
-
-        // Check if the response contains a property indicating success
-        if (response.data && response.data.success) {
-          setSubmitMessage("Message submitted successfully");
-          // Perform actions for a successful submission (e.g., show a success message)
-        } else {
-          setSubmitMessage(
-            response.data.message || "Message submission failed"
-          );
-          // Perform actions for a failed submission (e.g., show an error message)
-        }
+        // Reset form and error state
+        setFormData({
+          name: "",
+          role: "",
+          email: "",
+          consentCheckbox: false,
+        });
+        setErrors({});
       } catch (error) {
-        console.error("Error submitting form:", error);
-        setSubmitMessage("An error occurred while submitting the form");
-        // Handle error, e.g., show an error message to the user
+        console.error(error);
+        setSubmitMessage("Failed to send email");
       }
     } else {
-      console.log("Form validation failed");
       setSubmitMessage("Form validation failed");
     }
   };
@@ -148,25 +141,65 @@ const Discount = () => {
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
+  // useEffect(() => {
+  //   // Set a timeout to hide the image after 7 seconds
+  //   const imageTimeoutId = setTimeout(() => {
+  //     setShowImage(false);
+  //   }, 7000);
+
+  //   // Clear the image timeout when the component is unmounted
+  //   return () => {
+  //     clearTimeout(imageTimeoutId);
+  //   };
+  // }, []);
   return (
     <div className="discount-container">
+      {/* <img
+        src={yourGif}
+        className="back-video"
+        style={{
+          width: "100%",
+        }}
+      /> */}
       <video
         src={Video1}
         autoPlay
         loop
         muted
+        poster={discount}
+        preload="auto"
         className="back-video"
-        onError={handleVideoError}
-        onLoadedData={handleVideoLoaded}
+        // onError={handleVideoError}
+        // onLoadedData={handleVideoLoaded}
       />
-      <div
+      {/* {showImage && (
+        <img
+          src={discount}
+          className="back-video vide-contained"
+          style={{
+            width: "100%",
+            opacity: "50%",
+          }}
+        />
+      )}
+      {!showImage && (
+        <video
+          src={Video1}
+          autoPlay
+          loop
+          muted
+          className="back-video vide-contained"
+          style={{ display: showImage ? "none" : "block" }}
+        />
+      )} */}
+      {/* <div
         className="video-gap2"
         style={
           videoLoaded || videoError ? { display: "none" } : { display: "block" }
         }
       >
         <img src={imgg} alt="" />
-      </div>
+      </div> */}
 
       <div className="video-gap1">
         <img src={yourGif} alt="GIF" />
@@ -185,10 +218,10 @@ const Discount = () => {
             data-aos-offset="200"
             data-aos-duration="600"
           >
-            <div className="nurse-logo">
+            {/* <div className="nurse-logo">
               <img src={Tooth} alt="" />
-            </div>
-            <div className="nurse-heading">
+            </div> */}
+            <div className="nurse-heading nurse-best">
               <h2>
                 Why <span style={{ color: "#497367" }}>Practices</span> should
                 join us!
@@ -196,14 +229,19 @@ const Discount = () => {
             </div>
             <div className="nurse-para2">
               <p>
-                At Nomad Nurse, we invite dental practices to elevate their
-                staffing experience by joining our dynamic platform. We
-                understand the pivotal role that a skilled dental nurse plays in
-                ensuring the smooth functioning of a practice. Our user-friendly
-                interface streamlines the recruitment process, allowing you to
-                find the perfect match quickly and efficiently. Join us in
-                transforming the way you staff your practice and experience the
-                convenience of finding the right dental nurse with ease
+                We invite dental practices to elevate their staffing experience
+                by joining our dynamic platform. We understand the pivotal role
+                that a skilled dental nurse plays in ensuring the smooth
+                functioning of a practice.
+              </p>
+              <p>
+                Our user-friendly platform streamlines the recruitment process,
+                allowing you to find the perfect match quickly and efficiently.
+              </p>
+              <p>
+                Join us in transforming the way you staff your practice and
+                experience the convenience of finding the right dental nurse
+                with ease.
               </p>
             </div>
 
@@ -245,9 +283,13 @@ const Discount = () => {
                             <option value="" disabled hidden>
                               Choose your role
                             </option>
-                            <option value="role1">Dental Nurse</option>
-                            <option value="role2">Dental Practice</option>
-                            <option value="role3">Dental Corporate</option>
+                            <option value="Dental Nurse">Dental Nurse</option>
+                            <option value="Independent Practice">
+                              Independent Practice
+                            </option>
+                            <option value="Dental Corporate">
+                              Dental Corporate
+                            </option>
                           </select>
                         </div>
                         <div className="error-message">{errors.role}</div>

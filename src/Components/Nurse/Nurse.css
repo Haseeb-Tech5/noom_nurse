@@ -11,10 +11,13 @@
   /* background-image: url("../../Assetss/Capawad\ 2.png");
   background-size: cover;
   background-position-y: 70px; */
-  height: 647px;
+  height: auto;
   width: 100%;
   background-color: #f5f3ef;
+  padding-top: 3%;
+  padding-bottom: 4%;
 }
+
 .background img {
   /* height: 70%; */
   width: 100%;
@@ -61,7 +64,7 @@
   font-size: 40px;
   line-height: 50px;
   font-weight: 600;
-  font-family: "Poppins", sans-serif;
+  font-family: "Amasis MT Pro Light", sans-serif;
 }
 .nurse-para {
   width: 80%;
@@ -109,10 +112,10 @@
   align-items: center;
   border-radius: 25px;
   overflow: hidden;
-  background-image: url("../../Assetss/Rectangle.jpg");
+  background-image: url("../../Assetss/prper.jpeg");
   background-size: cover;
-  width: 80%;
-  height: 56%;
+  width: 90%;
+  height: 95%;
   background-repeat: no-repeat;
   background-position: center;
   background-position-y: 0%;
@@ -138,7 +141,7 @@
   color: white;
   font-size: 40px;
   font-weight: 600;
-  font-family: "Poppins", sans-serif;
+  font-family: "Amasis MT Pro Light", sans-serif;
   width: 250px;
   text-align: center;
 }
@@ -233,11 +236,17 @@
 @media screen and (max-width: 1150px) {
   .hmmmmm {
     width: 80%;
-    height: 300px;
+    height: 350px;
     background-size: cover !important;
     margin-bottom: 30px;
     border-radius: 15px;
     /* background-color: red; */
+  }
+}
+@media screen and (min-width: 1000px) and (max-width: 1100px) {
+  .nurse-para p {
+    font-size: 17px !important;
+    line-height: 23px;
   }
 }
 @media screen and (max-width: 500px) {

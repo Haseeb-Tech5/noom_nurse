@@ -16,9 +16,9 @@ import Img3 from "../../Assetss/Group 4.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
-import Img4 from "../../Assetss/Avatar1 (1).png";
-import Img5 from "../../Assetss/Avatar2.png";
-import Img6 from "../../Assetss/Avatar3.png";
+import Img4 from "../../Assetss/doctor3.jpg";
+import Img5 from "../../Assetss/doctor2.jpg";
+import Img6 from "../../Assetss/doctor1.jpg";
 import { BounceLoader } from "react-spinners";
 import { animateScroll as scroll, Events, scrollSpy } from "react-scroll";
 import axios from "axios";
@@ -27,6 +27,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button } from "react-bootstrap";
 
 const Contact = () => {
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [isLoading, setLoading] = useState(true);
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -90,38 +91,31 @@ const Contact = () => {
 
     if (validateForm()) {
       try {
-        console.log("Submitting form data:", formData);
+        const response = await fetch("http://localhost:5000/send-email", {
+          method: "POST",
+          body: JSON.stringify({
+            to: formData.email,
+            subject: "nomadnurse.co.uk",
+            text: `Name: ${formData.name}, Role: ${formData.role}.`,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await response.json();
+        setSubmitMessage(data.message);
 
-        const response = await axios.post(
-          "/contact.php", // Updated to relative path due to the proxy configuration
-          {
-            subject: formData.name,
-            message: formData.message,
-          },
-          {
-            withCredentials: true,
-          }
-        );
-
-        console.log("Server response:", response);
-
-        // Check if the response contains a property indicating success
-        if (response.data && response.data.success) {
-          setSubmitMessage("Message submitted successfully");
-          // Perform actions for a successful submission (e.g., show a success message)
-        } else {
-          setSubmitMessage(
-            response.data.message || "Message submission failed"
-          );
-          // Perform actions for a failed submission (e.g., show an error message)
-        }
+        // Reset form and error state
+        setFormData({
+          name: "",
+          role: "",
+          email: "",
+          consentCheckbox: false,
+        });
+        setErrors({});
       } catch (error) {
-        console.error("Error submitting form:", error);
-        setSubmitMessage("An error occurred while submitting the form");
-        // Handle error, e.g., show an error message to the user
+        console.error(error);
+        setSubmitMessage("Failed to send email");
       }
     } else {
-      console.log("Form validation failed");
       setSubmitMessage("Form validation failed");
     }
   };
@@ -164,13 +158,20 @@ const Contact = () => {
   useEffect(() => {
     AOS.init({ duration: 800, easing: "ease-out" });
   }, []);
-
+  // CONTACT FORM
   const handleInputChange1 = (e) => {
-    const { name, value } = e.target;
-    setFormData1({
-      ...formData1,
-      [name]: value,
-    });
+    const { name, value, type, checked } = e.target;
+    if (type === "checkbox") {
+      setFormData1({
+        ...formData1,
+        [name]: checked,
+      });
+    } else {
+      setFormData1({
+        ...formData1,
+        [name]: value,
+      });
+    }
   };
 
   const handleCheckboxChange = () => {
@@ -244,42 +245,41 @@ const Contact = () => {
   const handleSubmit1 = async (e) => {
     e.preventDefault();
 
-    console.log("Before validateForm");
-
-    if (validateForm()) {
-      console.log("After validateForm (form is valid)");
-
+    if (validateForm1()) {
       try {
-        console.log("Submitting form data:", formData1);
+        const response = await fetch("http://localhost:5000/send-email", {
+          method: "POST",
+          body: JSON.stringify({
+            to: formData1.email,
+            subject: "nomadnurse.co.uk",
+            text: `Name: ${formData1.name}, Role: ${formData1.role}, Message: ${formData1.message}.`,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await response.json();
+        setSubmitMessage1(data.message);
 
-        // Adjust the URL based on your backend API endpoint
-        const response = await axios.post(
-          "/contact.php", // Updated to relative path due to the proxy configuration
-          formData1,
-          {
-            withCredentials: true,
-          }
-        );
-
-        console.log("Server response:", response);
-
-        if (response.data && response.data.success) {
-          setSubmitMessage1("Message submitted successfully");
-        } else {
-          setSubmitMessage1(
-            response.data.message || "Message submission failed"
-          );
-        }
+        // Reset form and error state
+        setFormData1({
+          name: "",
+          role: "",
+          email: "",
+          message: "",
+          consent: false, // Corrected from consentCheckbox to consent
+        });
       } catch (error) {
-        console.error("Error submitting form:", error);
-        setSubmitMessage1("An error occurred while submitting the form");
+        console.error(error);
+        setSubmitMessage1("Failed to send email");
       }
     } else {
-      console.log("After validateForm (form is invalid)");
-      console.log("Form validation failed");
       setSubmitMessage1("Form validation failed");
     }
   };
+
+  useEffect(() => {
+    // Update the current year when the component mounts
+    setCurrentYear(new Date().getFullYear());
+  }, []);
   return (
     <>
       {isLoading ? (
@@ -345,7 +345,7 @@ const Contact = () => {
                             <div className="re-heading1">Office Address</div>
                             <div className="re-para1">
                               Nomad Nurse, 4th Floor, Silverstream House, 45
-                              Fitzroy Street, Fitzrovia, London, W1T 6EB
+                              Fitzroy Street, London, W1T 6EB
                             </div>
                           </div>
                         </div>
@@ -389,7 +389,7 @@ const Contact = () => {
                           </div>
                           <div className="re">
                             <div className="re-heading1">Phone Number</div>
-                            <div className="re-para1">0204 538 6233</div>
+                            <div className="re-para1">020 4538 6233</div>
                           </div>
                         </div>
                       </div>
@@ -416,7 +416,7 @@ const Contact = () => {
                       data-aos-duration="600"
                     >
                       <div className="right-section-content1">
-                        <div
+                        <form
                           className="form-container"
                           onSubmit={handleSubmit1}
                         >
@@ -459,9 +459,13 @@ const Contact = () => {
                               <option value="" disabled hidden>
                                 Choose your role
                               </option>
-                              <option value="role1">Dental Nurse</option>
-                              <option value="role2">Dental Practice</option>
-                              <option value="role3">Dental Corporate</option>
+                              <option value="Dental Nurse">Dental Nurse</option>
+                              <option value="Independent Practice">
+                                Independent Practice
+                              </option>
+                              <option value="Dental Corporate">
+                                Dental Corporate
+                              </option>
                             </select>
                           </div>
                           <label htmlFor="message">Message</label>
@@ -469,11 +473,11 @@ const Contact = () => {
                             id="message"
                             name="message"
                             placeholder="Write your message here"
-                            checked={formData1.consentCheckbox}
+                            value={formData1.message}
                             onChange={handleInputChange1}
                           ></textarea>
-                        </div>
-                        <div className="form-container">
+
+                          {/* <div className="form-container"> */}
                           <div className="cccc">
                             <div className="form-checkbox1">
                               <input
@@ -503,11 +507,10 @@ const Contact = () => {
                           </div>
 
                           <div className="form-button">
-                            <button type="submit" onClick={validateForm1}>
-                              Send Message
-                            </button>
+                            <button type="submit">Send Message</button>
                           </div>
-                        </div>
+                          {/* </div> */}
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -573,13 +576,13 @@ const Contact = () => {
                                       <option value="" disabled hidden>
                                         Choose your role
                                       </option>
-                                      <option value="role1">
+                                      <option value="Dental Nurse">
                                         Dental Nurse
                                       </option>
-                                      <option value="role2">
-                                        Dental Practice
+                                      <option value="Independent Practice">
+                                        Independent Practice
                                       </option>
-                                      <option value="role3">
+                                      <option value="Dental Corporate">
                                         Dental Corporate
                                       </option>
                                     </select>
@@ -685,7 +688,9 @@ const Contact = () => {
                     </div>
                   </div>
                   <div className="title-container1">
-                    <h2>© 2023 Nomad Nurse Ltd. All rights reserved.</h2>
+                    <h2>
+                      © {currentYear} Nomad Nurse Ltd. All rights reserved.
+                    </h2>
                   </div>
                 </div>
               </div>

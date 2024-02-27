@@ -15,3 +15,29 @@
   box-shadow: 0px 0px 7px 7px rgba(255, 255, 255, 0.8);
   z-index: 1;
 }
+@media screen and (max-width: 600px) {
+  .flex-margin {
+    height: 130px;
+    background-color: #f5f3ef !important;
+  }
+}
+@media screen and (max-width: 430px) {
+  .flex-margin {
+    height: 150px;
+  }
+}
+@media screen and (max-width: 354px) {
+  .flex-margin {
+    height: 170px;
+  }
+}
+@media screen and (max-width: 901px) {
+  .register-setting-flex {
+    height: 20px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .register-setting-flex {
+    height: 60px;
+  }
+}

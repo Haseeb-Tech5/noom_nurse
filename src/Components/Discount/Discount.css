@@ -6,11 +6,12 @@
 .discount-container {
   width: 100%;
   display: flex;
-  height: 577px;
+  height: 500px;
+  /* background-color: orange; */
 }
 .back-video {
   width: 100%;
-  height: 577px;
+  height: 500px;
   object-fit: cover;
   border-radius: 10px;
   position: absolute;
@@ -36,9 +37,10 @@
   justify-content: center;
   align-items: center;
   color: rgb(0, 0, 0);
-  font-family: "Poppins", sans-serif;
+  font-family: "Amasis MT Pro Light", sans-serif;
   font-weight: 600;
   font-size: 40px;
+  z-index: 5;
   /* background-color: red; */
 }
 .right-discount {
@@ -270,5 +272,20 @@
 @media screen and (min-width: 401px) and (max-width: 590px) {
   .video-gap1 {
     height: 600px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .nurse-best {
+    padding-top: 5%;
+  }
+}
+@media screen and (min-width: 1291px) and (max-width: 1330px) {
+  .nurse-best h2 {
+    white-space: nowrap;
+  }
+}
+@media screen and (min-width: 801px) and (max-width: 999px) {
+  .nurse-best h2 {
+    padding-top: 5%;
   }
 }

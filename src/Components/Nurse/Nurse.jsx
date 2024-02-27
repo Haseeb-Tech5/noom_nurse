@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Nurse.css";
 import Tooth from "../../Assetss/tooth.png";
 import Rect from "../../Assetss/Rectangle.jpg";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button } from "react-bootstrap";
 import { animateScroll as scroll } from "react-scroll";
+import emailjs from "@emailjs/browser";
 
 import background from "../../Assetss/Capawad 2.png";
 import AOS from "aos";
@@ -29,6 +30,7 @@ const Data = [
 ];
 
 const Nurse = () => {
+  const form = useRef(); // Create a ref for the form element
   useEffect(() => {
     AOS.init({ duration: 800, easing: "ease-out" });
   }, []);
@@ -92,42 +94,34 @@ const Nurse = () => {
 
     if (validateForm()) {
       try {
-        console.log("Submitting form data:", formData);
+        const response = await fetch("http://localhost:5000/send-email", {
+          method: "POST",
+          body: JSON.stringify({
+            to: formData.email,
+            subject: "nomadnurse.co.uk",
+            text: `Name: ${formData.name}, Role: ${formData.role}.`,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await response.json();
+        setSubmitMessage(data.message);
 
-        const response = await axios.post(
-          "/contact.php", // Updated to relative path due to the proxy configuration
-          {
-            subject: formData.name,
-            message: formData.message,
-          },
-          {
-            withCredentials: true,
-          }
-        );
-
-        console.log("Server response:", response);
-
-        // Check if the response contains a property indicating success
-        if (response.data && response.data.success) {
-          setSubmitMessage("Message submitted successfully");
-          // Perform actions for a successful submission (e.g., show a success message)
-        } else {
-          setSubmitMessage(
-            response.data.message || "Message submission failed"
-          );
-          // Perform actions for a failed submission (e.g., show an error message)
-        }
+        // Reset form and error state
+        setFormData({
+          name: "",
+          role: "",
+          email: "",
+          consentCheckbox: false,
+        });
+        setErrors({});
       } catch (error) {
-        console.error("Error submitting form:", error);
-        setSubmitMessage("An error occurred while submitting the form");
-        // Handle error, e.g., show an error message to the user
+        console.error(error);
+        setSubmitMessage("Failed to send email");
       }
     } else {
-      console.log("Form validation failed");
       setSubmitMessage("Form validation failed");
     }
   };
-
   const validateForm = () => {
     const errors = {};
 
@@ -164,13 +158,9 @@ const Nurse = () => {
           data-aos-offset="200"
           data-aos-duration="600"
         >
-          <div
-            className="nurse-logo"
-            // data-aos="zoom-in"
-            // data-aos-duration="800"
-          >
+          {/* <div className="nurse-logo ">
             <img src={Tooth} alt="" />
-          </div>
+          </div> */}
           <div
             className="nurse-heading"
             // data-aos="zoom-in"
@@ -181,23 +171,26 @@ const Nurse = () => {
               us!
             </h2>
           </div>
-          <div
-            className="nurse-para"
-            // data-aos="zoom-in"
-            // data-aos-duration="800"
-          >
+          <div className="nurse-para">
             <p>
-              At Nomad Nurse, we redefine the experience of dental nurse
-              recruitment offering a platform that goes beyond the conventional.
-              We understand the unique challenges faced by both dental practices
-              and nurses in the industry. By choosing to work with us, dental
-              nurses gain access to a seamless and user-friendly platform that
-              effortlessly connects them with diverse opportunities. We
-              prioritize transparency, reliability, and efficiency in the
+              At Nomad Nurse, we are redefining the experience as we understand
+              the challenges faced by both dental practices and nurses in the
+              industry. By choosing to work with us, dental nurses gain access
+              to a seamless and user-friendly platform that connects them with
+              unlimited opportunities.
+            </p>
+          </div>
+          <div className="nurse-para">
+            <p>
+              We prioritise transparency, reliability, and efficiency in the
               recruitment process, ensuring that every match is not just a
-              placement but a harmonious collaboration. Join us in shaping the
-              future of dental care staffing, where your skills are valued, and
-              your career is empowered.
+              placement but a harmonious collaboration.
+            </p>
+          </div>
+          <div className="nurse-para">
+            <p>
+              Join us in shaping the future of dental care staffing, where your
+              skills are valued, and your career is empowered.
             </p>
           </div>
 
@@ -213,7 +206,7 @@ const Nurse = () => {
               <Modal.Title>Registration Form</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} ref={form}>
                 <div className="right-touch3">
                   <div className="right-section-content">
                     <div className="form-container2">
@@ -240,9 +233,13 @@ const Nurse = () => {
                           <option value="" disabled hidden>
                             Choose your role
                           </option>
-                          <option value="role1">Dental Nurse</option>
-                          <option value="role2">Dental Practice</option>
-                          <option value="role3">Dental Corporate</option>
+                          <option value="Dental Nurse">Dental Nurse</option>
+                          <option value="Independent Practice">
+                            Independent Practice
+                          </option>
+                          <option value="Dental Corporate">
+                            Dental Corporate
+                          </option>
                         </select>
                       </div>
                       <div className="error-message">{errors.role}</div>

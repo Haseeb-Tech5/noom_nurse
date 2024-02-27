@@ -31,6 +31,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: -8px;
+  margin-bottom: 9px;
 }
 .touch-img img {
   object-fit: contain;
@@ -392,7 +394,9 @@ input::placeholder {
 .form-checkbox {
   position: relative;
 }
-
+.touch-para-head-flex h2 {
+  font-family: "Amasis MT Pro Light", sans-serif;
+}
 .custom-checkbox {
   width: 17px;
   height: 17px;
@@ -464,6 +468,13 @@ input::placeholder {
     line-height: 20px;
   }
 }
+@media screen and (min-width: 1075px) and (max-width: 1081px) {
+  .para-form1 {
+    /* background-color: red; */
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 402px) {
   .re-heading {
     /* background-color: red; */
@@ -481,6 +492,9 @@ input::placeholder {
   .touch-heading h2 {
     font-size: 45px;
     line-height: 30px;
+  }
+  .touch-img {
+    margin-top: -2px;
   }
 }
 @media screen and (max-width: 940px) {

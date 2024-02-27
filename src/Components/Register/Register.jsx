@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Register.css";
-import Img from "../../Assetss/Avatar1 (1).png";
-import Img1 from "../../Assetss/Avatar2.png";
-import Img2 from "../../Assetss/Avatar3.png";
+import Img from "../../Assetss/doctor3.jpg";
+import Img1 from "../../Assetss/doctor2.jpg";
+import Img2 from "../../Assetss/doctor1.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
@@ -68,38 +68,31 @@ const Register = () => {
 
     if (validateForm()) {
       try {
-        console.log("Submitting form data:", formData);
+        const response = await fetch("http://localhost:5000/send-email", {
+          method: "POST",
+          body: JSON.stringify({
+            to: formData.email,
+            subject: "nomadnurse.co.uk",
+            text: `Name: ${formData.name}, Role: ${formData.role}.`,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await response.json();
+        setSubmitMessage(data.message);
 
-        const response = await axios.post(
-          "/contact.php", // Updated to relative path due to the proxy configuration
-          {
-            subject: formData.name,
-            message: formData.message,
-          },
-          {
-            withCredentials: true,
-          }
-        );
-
-        console.log("Server response:", response);
-
-        // Check if the response contains a property indicating success
-        if (response.data && response.data.success) {
-          setSubmitMessage("Message submitted successfully");
-          // Perform actions for a successful submission (e.g., show a success message)
-        } else {
-          setSubmitMessage(
-            response.data.message || "Message submission failed"
-          );
-          // Perform actions for a failed submission (e.g., show an error message)
-        }
+        // Reset form and error state
+        setFormData({
+          name: "",
+          role: "",
+          email: "",
+          consentCheckbox: false,
+        });
+        setErrors({});
       } catch (error) {
-        console.error("Error submitting form:", error);
-        setSubmitMessage("An error occurred while submitting the form");
-        // Handle error, e.g., show an error message to the user
+        console.error(error);
+        setSubmitMessage("Failed to send email");
       }
     } else {
-      console.log("Form validation failed");
       setSubmitMessage("Form validation failed");
     }
   };
@@ -145,7 +138,7 @@ const Register = () => {
             />
           ))}
         </div>
-        <div className="header1">
+        <div className="header1 header-para-flex-reg">
           <h2>Register and be the first to find out when we launch!</h2>
         </div>
         <div className="button-contained">
@@ -184,9 +177,13 @@ const Register = () => {
                         <option value="" disabled hidden>
                           Choose your role
                         </option>
-                        <option value="role1">Dental Nurse</option>
-                        <option value="role2">Dental Practice</option>
-                        <option value="role3">Dental Corporate</option>
+                        <option value="Dental Nurse">Dental Nurse</option>
+                        <option value="Independent Practice">
+                          Independent Practice
+                        </option>
+                        <option value="Dental Corporate">
+                          Dental Corporate
+                        </option>
                       </select>
                     </div>
                     <div className="error-message">{errors.role}</div>

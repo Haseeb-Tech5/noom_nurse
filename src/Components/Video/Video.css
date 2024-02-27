@@ -7,7 +7,10 @@
   display: flex;
   justify-content: center;
 }
-
+video {
+  width: 100%;
+  /* opacity: 60%; */
+}
 .video-heading-container {
   position: absolute;
   width: 90%;
@@ -43,6 +46,7 @@
   line-height: 60px;
   color: black;
   width: 60%;
+  font-family: "Amasis MT Pro Light", sans-serif;
   /* background-color: red; */
 }
 @media screen and (max-width: 1000px) {
@@ -185,13 +189,14 @@
     align-items: center;
     width: 100%;
     height: 850px;
-    opacity: 60%;
+    opacity: 100%;
   }
   .video-gap img {
     object-fit: cover;
     object-position: 70%;
     width: 100%;
     height: 100%;
+    opacity: 50%;
   }
 }
 .error-message {
@@ -210,8 +215,49 @@
   object-fit: cover;
   width: 100%;
   height: 850px;
-  opacity: 50%;
+  /* opacity: 50%; */
 
   /* position: relative;
   z-index: 1; */
+}
+@media screen and (min-width: 1275px) and (max-width: 1343px) {
+  .video-heading-container h2 {
+    font-size: 45px;
+  }
+}
+@media screen and (min-width: 1062px) and (max-width: 1119px) {
+  .video-heading-container h2 {
+    font-size: 37px;
+  }
+}
+@media screen and (min-width: 989px) and (max-width: 999px) {
+  .video-heading-container h2 {
+    font-size: 37px;
+  }
+}
+@media screen and (min-width: 686px) and (max-width: 719px) {
+  .video-heading-container {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 581px) and (max-width: 599px) {
+  .video-heading-container h2 {
+    font-size: 24px !important;
+  }
+}
+@media screen and (min-width: 514px) and (max-width: 539px) {
+  .video-heading-container h2 {
+    font-size: 23px !important;
+  }
+}
+
+@media screen and (min-width: 399px) and (max-width: 419px) {
+  .video-heading-container h2 {
+    font-size: 23px !important;
+  }
+}
+@media screen and (max-width: 350px) {
+  .video-heading-container h2 {
+    font-size: 20px !important;
+  }
 }

@@ -54,10 +54,13 @@ const Pages = () => {
             <div className="blurred-line" />
 
             <Discount />
-            <Testimonials />
+            {/* <Testimonials /> */}
             {/* <Blog /> */}
+            {/* <div className="flex-margin" /> */}
             {/* <Experience /> */}
+            <div className="register-setting-flex" />
             <Register />
+
             <Touch />
             {/* </div> */}
           </div>

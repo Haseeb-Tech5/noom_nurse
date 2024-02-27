@@ -10,6 +10,8 @@ import Cookies from "./Components/cookies";
 import Terms from "./Components/terms";
 import Faq from "./Components/Faq/Faq";
 import FaqPage from "./Components/FaqPage/FaqPage";
+import Form from "./Form/Form";
+// import Form from "./Form/Form";
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
           <Route path="/faq" element={<FaqPage />} />
         </Routes>
       </BrowserRouter>
+      {/* <Form /> */}
     </div>
   );
 }

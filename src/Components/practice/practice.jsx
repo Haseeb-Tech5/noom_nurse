@@ -20,11 +20,14 @@ import { Modal, Button } from "react-bootstrap";
 import { animateScroll as scroll } from "react-scroll";
 import Icon1 from "../../Components/Icons/Icon1";
 import Icon3 from "../../Components/Icons/Icon3";
-import Icon4 from "../../Components/Icons/Icon4";
+import Icon10 from "../../Components/Icons/Icon10";
+import Icon11 from "../../Components/Icons/Icon11";
+
 import Practice1 from "../../Components/Icons/Practice1";
 import Practice2 from "../../Components/Icons/Practice2";
 import Practice3 from "../../Components/Icons/Practice3";
 import axios from "axios";
+import IconReliability from "../Icons/IconReliability";
 
 export default function Practice() {
   const images = [
@@ -93,15 +96,16 @@ export default function Practice() {
       demoImg: "iconn3.svg",
       title: "Convenience",
       text: "Simplifies tasks, saves time through paperless transactions",
-      pathData: "M7.5 50C27.5 50 52.5 10 52.5 10",
+      pathData:
+        "M16.21 49.21C16.21 62.33 26.88 73 40 73s23.79-10.67 23.79-23.79c0-12.19-9.21-22.26-21.04-23.63v-1.24a8.834 8.834 0 0 0 6.14-8.45C48.89 10.99 44.9 7 40 7s-8.89 3.99-8.89 8.89c0 3.9 2.49 7.27 6.14 8.45v1.24c-11.83 1.37-21.04 11.44-21.04 23.63zm45.58 0C61.79 61.22 52.02 71 40 71s-21.79-9.78-21.79-21.79 9.77-21.8 21.79-21.8 21.79 9.78 21.79 21.8zM36.62 19.27v-1.51h6.77v1.51h-5.14zm6.13 2h1.54c-.47.37-.98.69-1.54.93zm-9.64-5.38C33.11 12.09 36.2 9 40 9s6.89 3.09 6.89 6.89c0 1.62-.56 3.1-1.51 4.29v-3.41c0-.55-.45-1-1-1h-8.77c-.55 0-1 .45-1 1v3.41a6.88 6.88 0 0 1-1.5-4.29zm2.6 5.38h1.54v.93a6.65 6.65 0 0 1-1.54-.93zm3.54 4.14v-4.13h1.51v4.13z M20.2 49.21C20.2 60.12 29.08 69 40 69s19.79-8.88 19.79-19.79S50.91 29.42 40 29.42s-19.8 8.87-19.8 19.79zm37.59 0C57.79 59.02 49.81 67 40 67s-17.8-7.98-17.8-17.79 7.98-17.79 17.79-17.79 17.8 7.97 17.8 17.79z M39 33.5v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM40 62c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1zM26.25 48.25h-2c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1s-.45-1-1-1zM53.75 50.25h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM49.72 40.53c.26 0 .51-.1.71-.29l1.42-1.41a.996.996 0 1 0-1.41-1.41l-1.42 1.41a.996.996 0 0 0 .7 1.7zM29.57 58.27l-1.41 1.41a.996.996 0 0 0 .71 1.7c.26 0 .51-.1.71-.29l1.41-1.41c.39-.39.39-1.02 0-1.41s-1.03-.39-1.42 0zM29.57 37.41a.996.996 0 1 0-1.41 1.41l1.41 1.41c.2.2.45.29.71.29s.51-.1.71-.29a.996.996 0 0 0 0-1.41zM50.43 61.09c.2.2.45.29.71.29s.51-.1.71-.29a.996.996 0 0 0 0-1.41l-1.42-1.41a.996.996 0 1 0-1.41 1.41zM41 40c0-.55-.45-1-1-1s-1 .45-1 1v6.18c-1.16.41-2 1.51-2 2.82s.84 2.4 2 2.82V54c0 .55.45 1 1 1s1-.45 1-1v-2.18c1.16-.41 2-1.51 2-2.82s-.84-2.4-2-2.82zm-1 10c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z",
     },
     {
-      img: "icon4.svg",
-      demoImg: "iconn4.svg",
+      img: { IconReliability },
+      demoImg: { IconReliability },
       title: "Reliability",
       text: "Constantly live app, diverse nurses: Unwavering reliability at your service",
       pathData:
-        "M10 45V25C10 22.2386 12.2386 20 15 20H28H37H50C52.7615 20 55 22.2386 55 25V45C55 47.7615 52.7615 50 50 50H37H28H15C12.2386 50 10 47.7615 10 45Z M46.25 35.0254L46.2753 34.9973 M18.75 35.0252L18.7753 34.9972 M10 40H7.5C4.73857 40 2.5 37.7615 2.5 35V15C2.5 12.2386 4.73857 10 7.5 10H42.5C45.2615 10 47.5 12.2386 47.5 15V20 M32.5 40C29.7385 40 27.5 37.7615 27.5 35C27.5 32.2385 29.7385 30 32.5 30C35.2615 30 37.5 32.2385 37.5 35C37.5 37.7615 35.2615 40 32.5 40Z",
+        "M19 25.86a1 1 0 0 1-.035-2 100.408 100.408 0 0 0 14.649-1.24.961.961 0 0 1 .262-.018 7.184 7.184 0 0 1 3.425 1.08 1 1 0 0 1-.581 1.809 1.029 1.029 0 0 1-.647-.229 4.99 4.99 0 0 0-2.205-.653 103.883 103.883 0 0 1-14.842 1.251z M55.58 49.65a4.032 4.032 0 0 1-2.375-.77l-.215-.149a.98.98 0 0 1-.119-.1L41.1 40.154a1 1 0 1 1 1.161-1.628l.8.57 11.015 7.943a.943.943 0 0 1 .094.077l.191.133a2.083 2.083 0 0 0 2.841-.393A2.051 2.051 0 0 0 57.561 45a2.006 2.006 0 0 0-.665-1.011L41.152 31.162c-6.029 3.2-10.3 1.554-12.339.251a2.3 2.3 0 0 1 .195-3.969l9.012-4.786a4.919 4.919 0 0 1 3.768-.33l5.331 1.73a6.932 6.932 0 0 0 4.8-.173l2.322-.951A1 1 0 1 1 55 24.785l-2.32.95a8.916 8.916 0 0 1-6.182.224l-5.326-1.729a2.9 2.9 0 0 0-2.219.2l-9.014 4.787a.3.3 0 0 0-.172.263.274.274 0 0 0 .128.255c2.1 1.342 5.705 2.326 10.866-.639a1 1 0 0 1 1.13.092l16.26 13.25a3.987 3.987 0 0 1 1.328 2 4.083 4.083 0 0 1-.7 3.645 4.032 4.032 0 0 1-3.199 1.567z M51.442 54.285a4.077 4.077 0 0 1-2.365-.753l-10.81-7.67a1 1 0 0 1 1.157-1.631l10.81 7.669a2.1 2.1 0 0 0 2.44-3.414L41.9 40.721a1 1 0 0 1 1.166-1.621l10.777 7.766a4.1 4.1 0 0 1-2.4 7.421z M46.775 58.292a3.941 3.941 0 0 1-2.251-.707l-9.687-6.71a1 1 0 0 1 1.139-1.645l9.687 6.71a1.969 1.969 0 0 0 2.74-.5 1.976 1.976 0 0 0-.48-2.725l-9.64-6.838a1 1 0 1 1 1.157-1.631l9.64 6.838a3.983 3.983 0 0 1 .969 5.493 3.942 3.942 0 0 1-2.549 1.65 4 4 0 0 1-.725.065z M41.061 61.58a4 4 0 0 1-1.991-.542l-5.377-3.1a1 1 0 0 1 1-1.732l5.376 3.1a2 2 0 0 0 2.7-.716 1.96 1.96 0 0 0-.587-2.621l-6.87-4.759a1 1 0 0 1 1.139-1.644l6.869 4.758a3.982 3.982 0 0 1-2.26 7.256z M29.738 60.983a4.02 4.02 0 0 1-2.656-7.043l2.671-2.34a4.022 4.022 0 0 1 5.676.369 4.022 4.022 0 0 1-.37 5.676l-2.671 2.345a4.006 4.006 0 0 1-2.65.993zm2.667-8.383a2.013 2.013 0 0 0-1.333.5L28.4 55.443a2.022 2.022 0 1 0 2.667 3.04l2.671-2.345a2.021 2.021 0 0 0-1.333-3.538z M23.684 58.259c-.089 0-.178 0-.267-.008a4 4 0 0 1-2.762-1.36A4.036 4.036 0 0 1 21 51.182l4.462-3.917a4.022 4.022 0 0 1 5.676.369l-.723.693.751-.66a4.021 4.021 0 0 1-.369 5.676l-4.466 3.917a3.99 3.99 0 0 1-2.647.999zm4.425-9.994a2.007 2.007 0 0 0-1.331.5l-4.462 3.917a2.052 2.052 0 0 0 1.231 3.57 2 2 0 0 0 1.465-.5l4.462-3.917a2.022 2.022 0 0 0 .186-2.854l-.029-.033a2.006 2.006 0 0 0-1.384-.679 3.293 3.293 0 0 0-.139-.003z M18.638 54.588c-.088 0-.177 0-.267-.008a4 4 0 0 1-2.762-1.36l-.109-.13a4.022 4.022 0 0 1 .371-5.674l5.173-4.541a4.021 4.021 0 0 1 5.676.369l.113.129a4.021 4.021 0 0 1-.371 5.674l-5.173 4.541a3.992 3.992 0 0 1-2.651 1zm5.053-10.712a2.008 2.008 0 0 0-1.331.5l-5.173 4.541A2.024 2.024 0 0 0 17 51.773l.113.129a2.023 2.023 0 0 0 2.853.184l5.173-4.541a2.022 2.022 0 0 0 .186-2.854l-.111-.127a2.007 2.007 0 0 0-1.387-.682 1.581 1.581 0 0 0-.136-.006z M14.291 50.137c-.088 0-.178 0-.267-.009a4.048 4.048 0 0 1-2.424-7.075l3.239-2.843a4.021 4.021 0 0 1 5.676.369l.035.04a4.021 4.021 0 0 1-.369 5.676l-3.239 2.843a3.991 3.991 0 0 1-2.651.999zm3.2-8.927a2.008 2.008 0 0 0-1.331.5l-3.239 2.843a2.022 2.022 0 0 0-.186 2.854 2.036 2.036 0 0 0 2.888.226l3.239-2.843a2.022 2.022 0 0 0 .186-2.854l-.035-.04a2.007 2.007 0 0 0-1.388-.683l-.139-.003z M12.477 44.612a.994.994 0 0 1-.6-.2l-3.417-2.6a1 1 0 0 1 1.211-1.592l3.417 2.6a1 1 0 0 1-.606 1.8zM58.519 45.72a1 1 0 0 1-.707-1.707l5.611-5.613a1 1 0 0 1 1.414 1.414l-5.611 5.611a1 1 0 0 1-.707.295z M66.17 43.645a1 1 0 0 1-.853-.476l-12.21-19.86a1 1 0 0 1 .24-1.314l12.093-9.366a1 1 0 0 1 1.587.567l5.947 25.947a1 1 0 0 1-.485 1.1l-5.831 3.277a.994.994 0 0 1-.488.125zm-10.889-20.62L66.517 41.3l4.341-2.44-5.43-23.692zM7.83 44a1 1 0 0 1-.489-.128L1.51 40.6a1 1 0 0 1-.485-1.1l5.948-25.944a1 1 0 0 1 1.587-.567l12.094 9.365a1 1 0 0 1 .24 1.314L8.683 43.528A1 1 0 0 1 7.83 44zm-4.688-4.778 4.341 2.439 11.236-18.276-10.147-7.857z",
     },
     {
       img: "practice2.svg",
@@ -109,7 +113,7 @@ export default function Practice() {
       title: " Transparency",
       text: "Clear processes, fostering trust in every transaction",
       pathData:
-        "M8.9 34.2H6.6C5.38 34.2 4.20998 33.7154 3.34731 32.8527C2.48464 31.99 2 30.82 2 29.6V6.6C2 5.38 2.48464 4.20998 3.34731 3.34731C4.20998 2.48464 5.38 2 6.6 2H43.4C44.62 2 45.79 2.48464 46.6527 3.34731C47.5154 4.20998 48 5.38 48 6.6V29.6C48 30.82 47.5154 31.99 46.6527 32.8527C45.79 33.7154 44.62 34.2 43.4 34.2H41.1 M25 29.6001L36.5 43.4001H13.5L25 29.6001Z",
+        "m43.018 42.784-3.9-3.912a9.015 9.015 0 1 0-4.243 4.242l3.911 3.9a2.994 2.994 0 1 0 4.236-4.233zM26.05 39.95a7 7 0 1 1 9.9 0 7.007 7.007 0 0 1-9.9 0zM41.6 45.6a1 1 0 0 1-1.406 0l-3.581-3.573a8.489 8.489 0 0 0 1.414-1.413L41.6 44.2a.991.991 0 0 1 0 1.406z M25 44H12a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h17.38a2.973 2.973 0 0 1 .62.067V10a3 3 0 0 0 3 3h5.923a3 3 0 0 1 .077.651V27a1 1 0 0 0 2 0V13.651a4.975 4.975 0 0 0-1.456-3.527l-6.62-6.651A4.965 4.965 0 0 0 29.38 2H12a5.006 5.006 0 0 0-5 5v34a5.006 5.006 0 0 0 5 5h13a1 1 0 0 0 0-2zm12.594-33H33a1 1 0 0 1-1-1V5.38z M14 13h11a1 1 0 0 0 0-2H14a1 1 0 0 0 0 2zM34 17H17a1 1 0 0 0 0 2h17a1 1 0 0 0 0-2zM35 23a1 1 0 0 0-1-1H14a1 1 0 0 0 0 2h20a1 1 0 0 0 1-1zM21 28a1 1 0 0 0-1-1h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 1-1zM14 34h4a1 1 0 0 0 0-2h-4a1 1 0 0 0 0 2zM14 39h5a1 1 0 0 0 0-2h-5a1 1 0 0 0 0 2zM31 38a3 3 0 0 1-3-3 1 1 0 0 0-2 0 5.006 5.006 0 0 0 5 5 1 1 0 0 0 0-2z",
     },
     {
       img: "practice3.svg",
@@ -163,38 +167,31 @@ export default function Practice() {
 
     if (validateForm()) {
       try {
-        console.log("Submitting form data:", formData);
+        const response = await fetch("http://localhost:5000/send-email", {
+          method: "POST",
+          body: JSON.stringify({
+            to: formData.email,
+            subject: "nomadnurse.co.uk",
+            text: `Name: ${formData.name}, Role: ${formData.role}.`,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await response.json();
+        setSubmitMessage(data.message);
 
-        const response = await axios.post(
-          "/contact.php", // Updated to relative path due to the proxy configuration
-          {
-            subject: formData.name,
-            message: formData.message,
-          },
-          {
-            withCredentials: true,
-          }
-        );
-
-        console.log("Server response:", response);
-
-        // Check if the response contains a property indicating success
-        if (response.data && response.data.success) {
-          setSubmitMessage("Message submitted successfully");
-          // Perform actions for a successful submission (e.g., show a success message)
-        } else {
-          setSubmitMessage(
-            response.data.message || "Message submission failed"
-          );
-          // Perform actions for a failed submission (e.g., show an error message)
-        }
+        // Reset form and error state
+        setFormData({
+          name: "",
+          role: "",
+          email: "",
+          consentCheckbox: false,
+        });
+        setErrors({});
       } catch (error) {
-        console.error("Error submitting form:", error);
-        setSubmitMessage("An error occurred while submitting the form");
-        // Handle error, e.g., show an error message to the user
+        console.error(error);
+        setSubmitMessage("Failed to send email");
       }
     } else {
-      console.log("Form validation failed");
       setSubmitMessage("Form validation failed");
     }
   };
@@ -288,11 +285,13 @@ export default function Practice() {
                                     <option value="" disabled hidden>
                                       Choose your role
                                     </option>
-                                    <option value="role1">Dental Nurse</option>
-                                    <option value="role2">
-                                      Dental Practice
+                                    <option value="Dental Nurse">
+                                      Dental Nurse
                                     </option>
-                                    <option value="role3">
+                                    <option value="   Independent Practice">
+                                      Independent Practice
+                                    </option>
+                                    <option value=" Dental Corporate">
                                       Dental Corporate
                                     </option>
                                   </select>
@@ -387,12 +386,12 @@ export default function Practice() {
                           pathData={icon.pathData}
                         />
                       ) : index === 2 ? (
-                        <Icon3
+                        <Icon11
                           hovered={hoveredIndex === index}
                           pathData={icon.pathData}
                         />
                       ) : index === 3 ? (
-                        <Icon4
+                        <Icon10
                           hovered={hoveredIndex === index}
                           pathData={icon.pathData}
                         />
@@ -418,9 +417,7 @@ export default function Practice() {
                 ))}
               </div>
             </div>
-            {/* <div className="nurse-testominal">
-              <Testimonials />
-            </div> */}
+            {/*          
             <div className="testimonial-container1">
               <div className="testi-full-container">
                 <div
@@ -446,8 +443,7 @@ export default function Practice() {
                 </div>
                 <div
                   className="slider-container"
-                  // data-aos="zoom-in"
-                  // data-aos-duration="800"
+                 
                 >
                   <Slider ref={(c) => setSlider(c)} {...settings}>
                     <div className="slider-item">
@@ -503,23 +499,7 @@ export default function Practice() {
                         </p>
                       </div>
                     </div>{" "}
-                    {/* <div className="slider-item">
-                      <div className="h3-heading">
-                        <h3>Dentistry @ Oceana Boulevard</h3>
-                      </div>
-                      <div className="h5-heading">
-                        <p>Dental Practice</p>
-                      </div>
-                      <div className="p-para">
-                        <p>
-                          “The platform's innovative approach to dental nurse
-                          recruitment ensures that we can access a diverse pool
-                          of skilled nurses with just a few clicks. It's a
-                          modern solution that has significantly improved our
-                          overall efficiency.
-                        </p>
-                      </div>
-                    </div>{" "} */}
+                  
                   </Slider>
                   <div className="custom-arrows">
                     <div
@@ -541,7 +521,7 @@ export default function Practice() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <Register />
             <Touch />
           </div>

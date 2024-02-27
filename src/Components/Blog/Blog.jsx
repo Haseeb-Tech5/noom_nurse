@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./Blog.css";
+import "./responsive.css";
 import Line from "../../Assetss/text.svg";
 import Img from "../../Assetss/pexels-anna-shvets-3845761 2 (2).png";
 import AOS from "aos";
@@ -33,16 +34,20 @@ const Blog = () => {
               data-aos-duration="600"
             >
               <div className="card-blog1">
-                <div className="blog-card-img">
-                  <img src="doctor.png" alt="" />
-                  <div className="card-logo2">
-                    <p
-                      style={{
-                        color: "rgba(73, 115, 103, 1)",
-                      }}
-                    >
-                      Health
-                    </p>
+                <div className="blog-img-container-flex-contained">
+                  <div className="blog-card-img">
+                    <img src="doctor.png" alt="" />
+                  </div>
+                  <div className="doctor-logo-contained-flex">
+                    <div className="card-logo2">
+                      <p
+                        style={{
+                          color: "rgba(73, 115, 103, 1)",
+                        }}
+                      >
+                        Health
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div className="blog-card-head">
@@ -89,7 +94,9 @@ const Blog = () => {
                   </div>
                 </div>
               </div>
-              <hr />
+              <div className="hr-contained">
+                <hr className="hr-set" />
+              </div>
               <div className="blog-card1">
                 <div className="blog-cardd">
                   <div className="blog-card-img2">
@@ -99,7 +106,7 @@ const Blog = () => {
                     <div className="card-logo">
                       <p style={{ color: "rgba(185, 28, 28, 1)" }}>Nursing</p>
                     </div>
-                    <div className="blog-card-head2">
+                    <div className="blog-card-head-flex">
                       <p>The nursing crunch is getting real</p>
                     </div>
                     <div className="blog-card-text2">

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import "./Video.css";
-import Video1 from "../Video/video.mp4";
-import imgg from "../../Components/Video/video-0.jpg";
-import { Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Video1 from "../Video/video-compress.mp4";
 import { Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { animateScroll as scroll } from "react-scroll";
-import yourGif from "../Video/ezgif.gif";
+import yourGif from "../Video/output-onlinegiftools.gif";
+import home from "../../Assetss/home.jpeg";
 
 const Video = () => {
   const scrollToTop = () => {
@@ -17,21 +16,12 @@ const Video = () => {
     name: "",
     role: "",
     email: "",
-    subject: "",
-    message: "",
     consentCheckbox: false,
   });
 
   const [errors, setErrors] = useState({});
   const [submitMessage, setSubmitMessage] = useState("");
-
   const [showForm, setShowForm] = useState(false);
-
-  const [videoError, setVideoError] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-
-  const handleVideoError = () => setVideoError(true);
-  const handleVideoLoaded = () => setVideoLoaded(true);
 
   const handleOpenForm = () => setShowForm(true);
 
@@ -41,8 +31,7 @@ const Video = () => {
       name: "",
       role: "",
       email: "",
-      subject: "",
-      message: "",
+
       consentCheckbox: false,
     });
     setErrors({});
@@ -55,7 +44,6 @@ const Video = () => {
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
-    // Clear the error when the user starts typing in the field
     setErrors({
       ...errors,
       [name]: "",
@@ -67,35 +55,34 @@ const Video = () => {
 
     if (validateForm()) {
       try {
-        const response = await fetch("https://nmapi.drnaiz.com/contact.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: new URLSearchParams(formData).toString(),
-        });
-
-        if (response.ok) {
-          const responseData = await response.json();
-          console.log("Server response:", responseData);
-
-          if (responseData.success) {
-            setSubmitMessage("Message submitted successfully");
-          } else {
-            setSubmitMessage(
-              responseData.message || "Message submission failed"
-            );
+        const response = await fetch(
+          "http://13.60.36.203:5001/nomad/send-email",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              to: formData.email,
+              subject: "nomadnurse.co.uk",
+              text: `Name: ${formData.name}, Role: ${formData.role}.`,
+            }),
+            headers: { "Content-Type": "application/json" },
           }
-        } else {
-          console.error("Failed to submit the form");
-          setSubmitMessage("Failed to submit the form");
-        }
+        );
+        const data = await response.json();
+        setSubmitMessage(data.message);
+
+        // Reset form and error state
+        setFormData({
+          name: "",
+          role: "",
+          email: "",
+          consentCheckbox: false,
+        });
+        setErrors({});
       } catch (error) {
-        console.error("Error submitting form:", error);
-        setSubmitMessage("An error occurred while submitting the form");
+        console.error(error);
+        setSubmitMessage("Failed to send email");
       }
     } else {
-      console.log("Form validation failed");
       setSubmitMessage("Form validation failed");
     }
   };
@@ -115,14 +102,6 @@ const Video = () => {
       errors.email = "Invalid email address";
     }
 
-    if (!formData.subject.trim()) {
-      errors.subject = "Subject is required";
-    }
-
-    if (!formData.message.trim()) {
-      errors.message = "Message is required";
-    }
-
     if (!formData.consentCheckbox) {
       errors.consentCheckbox = "You must consent to the privacy policy";
     }
@@ -138,21 +117,10 @@ const Video = () => {
         autoPlay
         loop
         muted
+        preload="auto"
         className="video"
-        onError={handleVideoError}
-        onLoadedData={handleVideoLoaded}
+        poster={home}
       />
-      <div
-        style={
-          !videoLoaded && !videoError
-            ? { display: "block" }
-            : { display: "none" }
-        }
-        className="video-gap1"
-      >
-        <img src={imgg} alt="" />
-      </div>
-
       <div className="video-heading-container">
         <h2>Connecting Nurses to Practices Bridging Excellence Together</h2>
         <button onClick={handleOpenForm}>Join now</button>
@@ -192,9 +160,11 @@ const Video = () => {
                       <option value="" disabled hidden>
                         Choose your role
                       </option>
-                      <option value="role1">Dental Nurse</option>
-                      <option value="role2">Dental Practice</option>
-                      <option value="role3">Dental Corporate</option>
+                      <option value="Dental Nurse">Dental Nurse</option>
+                      <option value="Independent Practice">
+                        Independent Practice
+                      </option>
+                      <option value="Dental Corporate">Dental Corporate</option>
                     </select>
                   </div>
                   <div className="error-message">{errors.role}</div>
@@ -210,28 +180,7 @@ const Video = () => {
                   />
                   <div className="error-message">{errors.email}</div>
                 </div>
-                <div className="form-container2">
-                  <label htmlFor="subject">Subject</label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    placeholder="Subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                  />
-                  <div className="error-message">{errors.subject}</div>
 
-                  <label htmlFor="message">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    placeholder="Your message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                  />
-                  <div className="error-message">{errors.message}</div>
-                </div>
                 <div className="form-container2">
                   <div className="cccc">
                     <div className="form-checkbox">
@@ -256,10 +205,10 @@ const Video = () => {
                         >
                           privacy policy.
                         </Link>
-                        <div className="error-message">
-                          {errors.consentCheckbox}
-                        </div>
                       </p>
+                      <div className="error-message">
+                        {errors.consentCheckbox}
+                      </div>
                     </div>
                   </div>
                   <div className="form-button">

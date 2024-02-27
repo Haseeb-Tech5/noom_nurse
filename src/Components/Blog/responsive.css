@@ -1,0 +1,221 @@
+@media screen and (max-width: 1140px) {
+  .blog-card-head p {
+    font-size: 18px;
+  }
+  .blog-card-text p {
+    font-size: 17px;
+  }
+  .blog-card-img img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+}
+@media screen and (min-width: 1187px) and (max-width: 1320px) {
+  .blog-card-img img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+}
+@media screen and (min-width: 1141px) and (max-width: 1186px) {
+  .blog-card-img img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+}
+@media screen and (max-width: 1123px) {
+  .blog-card-text2 {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 1105px) {
+  .blog-card-head-flex {
+    width: 95%;
+  }
+  .blog-card-head-flex p {
+    font-size: 18px;
+  }
+  .blog-card-head2 {
+    width: 95%;
+  }
+  .blog-card-head2 p {
+    font-size: 18px;
+  }
+}
+@media screen and (min-width: 1001px) and (max-width: 1039px) {
+  .blog-card-text2 {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .blog-cards-cont {
+    display: flex;
+    flex-direction: column;
+  }
+  .blog-img-cont {
+    height: auto;
+  }
+  .card-blog1 {
+    width: 100%;
+  }
+  .blog-card {
+    width: 100%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+  }
+  .blog-cards {
+    width: 100%;
+    height: 50%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+  }
+  .blog-card-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .blog-card-img img {
+    width: 95%;
+    height: 340px;
+    object-fit: cover;
+  }
+  .blog-img-container-flex-contained {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .doctor-logo-contained-flex {
+    width: 95%;
+  }
+  .blog-card-head {
+    width: 95%;
+  }
+  .blog-card-text {
+    width: 95%;
+  }
+  .blog-card-button {
+    width: 95%;
+  }
+  .hr-set {
+    width: 95%;
+  }
+  .blog-cardd {
+    width: 95%;
+  }
+}
+@media screen and (max-width: 944px) {
+  .blog-card {
+    height: 600px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .blog-cards-cont {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: -10%;
+    /* background-color: orange; */
+  }
+  .blog-card-img img {
+    height: 100%;
+    width: 90%;
+    margin-top: 2%;
+  }
+  .blog-card {
+    height: auto;
+  }
+  .doctor-logo-contained-flex {
+    width: 90%;
+    margin-top: 2%;
+  }
+  .blog-card-head {
+    width: 90%;
+  }
+  .blog-card-text {
+    width: 90%;
+  }
+  .blog-card-button {
+    width: 90%;
+    padding-bottom: 2%;
+  }
+  .blog-cardd {
+    width: 90%;
+  }
+  .blog-cardd {
+    display: flex;
+    flex-direction: column;
+  }
+  .blog-card1 {
+    height: auto;
+    width: 100%;
+  }
+  .blog-card-img2 {
+    width: 100%;
+  }
+  .blog-card-img2 img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  .card-flex {
+    width: 100%;
+    margin-left: 0px;
+  }
+  .blog-card-img2 {
+    margin-top: 5%;
+  }
+  .blog-card-button2 {
+    padding-bottom: 5%;
+  }
+  .card-logo {
+    margin-top: 4%;
+  }
+  .blog-card-head2 {
+    padding-top: 3%;
+  }
+}
+@media screen and (max-width: 469px) {
+  .blog-card-head p {
+    font-size: 16px;
+  }
+  .blog-card-text p {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 416px) {
+  .blog-card-text {
+    width: 90%;
+  }
+  .blog-card-head p {
+    line-height: 20px;
+    margin-top: 2%;
+  }
+}
+@media screen and (max-width: 382px) {
+  .blog-card-button button {
+    width: 250px;
+  }
+}
+@media screen and (max-width: 355px) {
+  .blog-card-head2 p {
+    font-size: 15px;
+  }
+  .blog-card-text2 {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 430px) {
+  .blog-cards-cont {
+    margin-top: -15%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .blog-cards-cont {
+    margin-top: -20%;
+  }
+}

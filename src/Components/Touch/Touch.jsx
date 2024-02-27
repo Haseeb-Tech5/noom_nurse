@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Touch.css";
 import Vector from "../../Assetss/text.svg";
@@ -15,10 +15,14 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { animateScroll as scroll, Events, scrollSpy } from "react-scroll";
 import axios from "axios";
+import emailjs from "@emailjs/browser";
 
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 
 const Touch = () => {
+  const form = useRef(); // Create a ref for the form element
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+
   const [formData, setFormData] = useState({
     name: "",
     role: "",
@@ -29,6 +33,7 @@ const Touch = () => {
 
   const [formErrors, setFormErrors] = useState({});
   const [submitMessage, setSubmitMessage] = useState(null);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     AOS.init({ duration: 800, easing: "ease-out" });
@@ -117,48 +122,47 @@ const Touch = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Before validateForm");
-
     if (validateForm()) {
-      console.log("After validateForm (form is valid)");
-
       try {
-        console.log("Submitting form data:", formData);
+        const response = await fetch("http://localhost:5000/send-email", {
+          method: "POST",
+          body: JSON.stringify({
+            to: formData.email,
+            subject: "nomadnurse.co.uk",
+            text: `Name: ${formData.name}, Role: ${formData.role},Message: ${formData.message}.`,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await response.json();
+        setSubmitMessage(data.message);
 
-        // Adjust the URL based on your backend API endpoint
-        const response = await axios.post(
-          "/contact.php", // Updated to relative path due to the proxy configuration
-          formData,
-          {
-            withCredentials: true,
-          }
-        );
-
-        console.log("Server response:", response);
-
-        if (response.data && response.data.success) {
-          setSubmitMessage("Message submitted successfully");
-        } else {
-          setSubmitMessage(
-            response.data.message || "Message submission failed"
-          );
-        }
+        // Reset form and error state
+        setFormData({
+          name: "",
+          role: "",
+          email: "",
+          message: "",
+          consentCheckbox: false,
+        });
+        setErrors({});
       } catch (error) {
-        console.error("Error submitting form:", error);
-        setSubmitMessage("An error occurred while submitting the form");
+        console.error(error);
+        setSubmitMessage("Failed to send email");
       }
     } else {
-      console.log("After validateForm (form is invalid)");
-      console.log("Form validation failed");
       setSubmitMessage("Form validation failed");
     }
   };
 
+  useEffect(() => {
+    // Update the current year when the component mounts
+    setCurrentYear(new Date().getFullYear());
+  }, []);
   return (
     <div className="touch-container">
       <div className="touch-container-full">
         <div
-          className="touch-heading"
+          className="touch-heading touch-para-head-flex"
           data-aos="zoom-in"
           data-aos-duration="800"
         >
@@ -188,7 +192,7 @@ const Touch = () => {
                   <div className="re-heading">Office Address</div>
                   <div className="re-para">
                     Nomad Nurse, 4th Floor, Silverstream House, 45 Fitzroy
-                    Street, Fitzrovia, London, W1T 6EB
+                    Street, London, W1T 6EB
                   </div>
                 </div>
               </div>
@@ -230,7 +234,7 @@ const Touch = () => {
                 </div>
                 <div className="re">
                   <div className="re-heading">Phone Number</div>
-                  <div className="re-para">0204 538 6233</div>
+                  <div className="re-para">020 4538 6233</div>
                 </div>
               </div>
             </div>
@@ -242,7 +246,11 @@ const Touch = () => {
             data-aos-duration="600"
           >
             <div className="right-section-content">
-              <div className="form-container" onSubmit={handleSubmit}>
+              <form
+                className="form-container"
+                onSubmit={handleSubmit}
+                ref={form}
+              >
                 <div className="firstView">
                   <div className="flex-container">
                     <div className="flex-item">
@@ -271,9 +279,13 @@ const Touch = () => {
                           <option value="" disabled hidden>
                             Choose your role
                           </option>
-                          <option value="role1">Dental Nurse</option>
-                          <option value="role2">Dental Practice</option>
-                          <option value="role3">Dental Corporate</option>
+                          <option value="Dental Nurse">Dental Nurse</option>
+                          <option value="Independent Practice">
+                            Independent Practice
+                          </option>
+                          <option value="Dental Corporate">
+                            Dental Corporate
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -287,7 +299,6 @@ const Touch = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                   />
-                  {/* {submitMessage && <div>{submitMessage}</div>} */}
                 </div>
 
                 <div className="scndview">
@@ -331,12 +342,15 @@ const Touch = () => {
                       <option value="" disabled hidden>
                         Choose your role
                       </option>
-                      <option value="role1">Dental Nurse</option>
-                      <option value="role2">Dental Practice</option>
-                      <option value="role3">Dental Corporate</option>
+                      <option value="Dental Nurse">Dental Nurse</option>
+                      <option value="Independent Practice">
+                        Independent Practice
+                      </option>
+                      <option value="Dental Corporate">Dental Corporate</option>
                     </select>
                   </div>
                 </div>
+
                 <label htmlFor="message">Message</label>
                 <textarea
                   id="message"
@@ -345,8 +359,8 @@ const Touch = () => {
                   value={formData.message}
                   onChange={handleInputChange}
                 />
-              </div>
-              <div className="form-container">
+
+                {/* <div className="form-container"> */}
                 <div className="cccc">
                   <div className="form-checkbox">
                     <input
@@ -373,12 +387,10 @@ const Touch = () => {
                 </div>
 
                 <div className="form-button">
-                  <button type="submit" onClick={validateForm}>
-                    Send Message
-                  </button>
+                  <button type="submit">Send Message</button>
                 </div>
-              </div>
-              {submitMessage && <div>{submitMessage}</div>}
+                {/* </div> */}
+              </form>
             </div>
           </div>
         </div>
@@ -426,7 +438,7 @@ const Touch = () => {
           </div>
         </div>
         <div className="title-container1">
-          <h2>© 2023 Nomad Nurse Ltd. All rights reserved.</h2>
+          <h2>© {currentYear} Nomad Nurse Ltd. All rights reserved.</h2>
         </div>
       </div>
     </div>

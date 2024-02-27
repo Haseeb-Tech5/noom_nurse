@@ -1,5 +1,6 @@
 import Navbar from "../Navbar/Navbar";
-import video2 from "../about/hmm.mp4";
+// import video2 from "../about/hmm.mp4";
+import video2 from "../about/hmm-compress-again.mp4";
 import Vector from "../../Assetss/text.svg";
 import Touch from "../Touch/Touch";
 import "./about.css";
@@ -13,6 +14,7 @@ import Line from "../../Assetss/Line 91.png";
 import Img from "../../Assetss/text.svg";
 import Img22 from "../../Assetss/Group 1000001058.png";
 import imgg from "../../Components/about/hmm-0.jpg";
+import Abo from "../../Assetss/about.jpeg";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -25,16 +27,16 @@ import Img3 from "../../Assetss/Group 4.png";
 import { Link } from "react-router-dom";
 import { animateScroll as scroll, Events, scrollSpy } from "react-scroll";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
-import yourGif from "../about/ezgi22f.gif";
+import yourGif from "../about/abtgif.gif";
 import axios from "axios";
+import golden from "../../Assetss/okkkk.svg";
 
 export default function About() {
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [slider, setSlider] = useState(null);
   const [activeArrow, setActiveArrow] = useState("next");
-  const [videoError, setVideoError] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const handleVideoError = () => setVideoError(true);
-  const handleVideoLoaded = () => setVideoLoaded(true);
+  const [showImage, setShowImage] = useState(true);
+  const [errors, setErrors] = useState({});
 
   const handleNext = () => {
     if (slider) {
@@ -171,42 +173,53 @@ export default function About() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Before validateForm");
-
     if (validateForm()) {
-      console.log("After validateForm (form is valid)");
-
       try {
-        console.log("Submitting form data:", formData);
+        const response = await fetch("http://localhost:5000/send-email", {
+          method: "POST",
+          body: JSON.stringify({
+            to: formData.email,
+            subject: "nomadnurse.co.uk",
+            text: `Name: ${formData.name}, Role: ${formData.role},Message: ${formData.message}.`,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await response.json();
+        setSubmitMessage(data.message);
 
-        // Adjust the URL based on your backend API endpoint
-        const response = await axios.post(
-          "/contact.php", // Updated to relative path due to the proxy configuration
-          formData,
-          {
-            withCredentials: true,
-          }
-        );
-
-        console.log("Server response:", response);
-
-        if (response.data && response.data.success) {
-          setSubmitMessage("Message submitted successfully");
-        } else {
-          setSubmitMessage(
-            response.data.message || "Message submission failed"
-          );
-        }
+        // Reset form and error state
+        setFormData({
+          name: "",
+          role: "",
+          email: "",
+          message: "",
+          consentCheckbox: false,
+        });
+        setErrors({});
       } catch (error) {
-        console.error("Error submitting form:", error);
-        setSubmitMessage("An error occurred while submitting the form");
+        console.error(error);
+        setSubmitMessage("Failed to send email");
       }
     } else {
-      console.log("After validateForm (form is invalid)");
-      console.log("Form validation failed");
       setSubmitMessage("Form validation failed");
     }
   };
+
+  // useEffect(() => {
+  //   // Set a timeout to hide the image after 7 seconds
+  //   const imageTimeoutId = setTimeout(() => {
+  //     setShowImage(false);
+  //   }, 7000);
+
+  //   // Clear the image timeout when the component is unmounted
+  //   return () => {
+  //     clearTimeout(imageTimeoutId);
+  //   };
+  // }, []);
+  useEffect(() => {
+    // Update the current year when the component mounts
+    setCurrentYear(new Date().getFullYear());
+  }, []);
   return (
     <>
       {isLoading ? (
@@ -220,18 +233,47 @@ export default function About() {
         </div>
       ) : (
         <>
-          <Navbar />
-          <div className="video-container">
-            <video
-              src={video2}
-              autoPlay
-              loop
-              muted
-              className="video"
-              onError={handleVideoError}
-              onLoadedData={handleVideoLoaded}
-            />
-            <div
+          <div style={{ overflow: "hidden" }}>
+            <Navbar />
+            <div className="video-container">
+              {/* {showImage && (
+                <img
+                  src={Abo}
+                  className="video vide-contained"
+                  style={{
+                    width: "100%",
+                  }}
+                />
+              )}
+              {!showImage && (
+                <video
+                  src={video2}
+                  autoPlay
+                  loop
+                  muted
+                  className="video vide-contained"
+                  style={{ display: showImage ? "none" : "block" }}
+                />
+              )} */}
+              {/* <img
+                src={yourGif}
+                className="video"
+                style={{
+                  width: "100%",
+                }}
+              /> */}
+              <video
+                src={video2}
+                autoPlay
+                loop
+                muted
+                preload="auto"
+                poster={Abo}
+                className="video"
+                // onError={handleVideoError}
+                // onLoadedData={handleVideoLoaded}
+              />
+              {/* <div
               style={
                 videoLoaded || videoError
                   ? { display: "none" }
@@ -240,24 +282,24 @@ export default function About() {
               className="video-gap4"
             >
               <img src={imgg} alt="" />
-            </div>
-            <div className="video-gap22">
-              <img src={yourGif} alt="GIF" />
-            </div>
-            <div className="video-heading-container">
-              {/* <div className="about-head"> */}
-              <h2 style={{ color: "white" }}>Our Mission</h2>
-
-              <img src={Vector} alt="" />
-
-              <div className="about-para2">
-                <p>Empowering dental staffing through seamless connections</p>
+            </div> */}
+              <div className="video-gap22">
+                <img src={yourGif} alt="GIF" />
               </div>
-              {/* <div className="video-gap22">
+              <div className="video-heading-container">
+                {/* <div className="about-head"> */}
+                <h2 style={{ color: "white" }}>Our Mission</h2>
+
+                <img src={Vector} alt="" />
+
+                <div className="about-para2">
+                  <p>Empowering dental staffing through seamless connections</p>
+                </div>
+                {/* <div className="video-gap22">
                 <img src={yourGif} alt="GIF" />
               </div> */}
-              {/* </div> */}
-              {/* <div className="story-container">
+                {/* </div> */}
+                {/* <div className="story-container">
                 <div className="width-container">
                   <div className="about-heading">
                     <h2>About us</h2>
@@ -294,370 +336,347 @@ export default function About() {
                   </div>
                 </div>
               </div> */}
-            </div>
-          </div>
-          <div className="story-container">
-            <div className="width-container">
-              <div
-                className="story-heading"
-                // data-aos="zoom-in"
-                // data-aos-duration="800"
-              >
-                <h2>About us</h2>
-              </div>
-              <div
-                className="story-img"
-                data-aos="zoom-in"
-                data-aos-duration="800"
-              >
-                <img src={Vector} alt="" />
-              </div>
-              <div
-                className="story-para"
-                data-aos="zoom-in"
-                data-aos-duration="800"
-              >
-                <p>
-                  The inception of Nomad Nurses arose from our personal
-                  experiences within the dental profession. We encountered
-                  difficulties in booking and securing nurses, realising that
-                  nurses lacked the means and access to practices seeking locum
-                  professionals.
-                </p>
-              </div>
-              <div
-                className="story-para"
-                data-aos="zoom-in"
-                data-aos-duration="800"
-              >
-                <p>
-                  Through the creation of our ground-breaking app and website,
-                  we successfully filled this void, facilitating communication
-                  between locum nurses and dental practices to minimise the
-                  disruption faced by dentists and patients.
-                </p>
-              </div>
-              <div
-                className="story-para"
-                data-aos="zoom-in"
-                data-aos-duration="800"
-              >
-                <p>
-                  As practicing dentists without a dedicated nurse, we
-                  recognised the vital significance of this venture for the
-                  dental industry. Our objective is to streamline the process of
-                  booking dental nurses for practices, ensuring a seamless
-                  experience and enabling nurses to find opportunities with the
-                  touch of a button.
-                </p>
               </div>
             </div>
-          </div>
-          <div className="flex" style={{ overflow: "hidden" }}>
-            {/* <Testimonials /> */}
-            <div className="testimonial-container">
-              <div className="testi-full-container">
+            <div className="story-container">
+              <div className="width-container">
                 <div
-                  className="testi-heading"
-                  data-aos="zoom-in"
-                  data-aos-duration="800"
-                >
-                  <h2>Testimonials</h2>
-                </div>
-                <div
-                  className="testi-img"
-                  data-aos="zoom-in"
-                  data-aos-duration="800"
-                >
-                  <img src={Img} alt="" />
-                </div>
-                <div
-                  className="testi-para"
-                  data-aos="zoom-in"
-                  data-aos-duration="800"
-                >
-                  <p>Hear how others have found the Nomad Nurse experience</p>
-                </div>
-                <div
-                  className="slider-container"
+                  className="story-heading about-heading-para-set"
                   // data-aos="zoom-in"
                   // data-aos-duration="800"
                 >
-                  <Slider ref={(c) => setSlider(c)} {...settings}>
-                    <div className="slider-item">
-                      <div className="h3-heading">
-                        <h3>Yasmine</h3>
-                      </div>
-                      <div className="h5-heading">
-                        <p>Locum Dental Nurse</p>
-                      </div>
-                      <div className="p-para">
-                        <p>
-                          “The platform has given me access to a wide range of
-                          opportunities, and the process of securing positions
-                          is seamless. I appreciate the consistent support and
-                          the chance to work with various dental practices."
-                        </p>
-                      </div>
-                    </div>{" "}
-                    <div className="slider-item">
-                      <div className="h3-heading">
-                        <h3>Abigail</h3>
-                      </div>
-                      <div className="h5-heading">
-                        <p>Locum Dental Nurse</p>
-                      </div>
-                      <div className="p-para">
-                        <p>
-                          “Working through Nomad Nurse has been a fantastic
-                          experience. The platform is easy to navigate, and I've
-                          been able to find rewarding positions quickly. The
-                          reliability and professionalism of the company make it
-                          my go-to for locum opportunities."
-                        </p>
-                      </div>
-                    </div>{" "}
-                    <div className="slider-item">
-                      <div className="h3-heading">
-                        <h3>Lucy</h3>
-                      </div>
-                      <div className="h5-heading">
-                        <p>Locum Dental Nurse</p>
-                      </div>
-                      <div className="p-para">
-                        <p>
-                          “Nomad Nurses has simplified my job search process.
-                          The ease of using the app, has made finding locum
-                          positions a breeze. The variety of available
-                          opportunities make it a go-to platform for any dental
-                          nurse."
-                        </p>
-                      </div>
-                    </div>{" "}
-                    <div className="slider-item">
-                      <div className="h3-heading">
-                        <h3>Expert Dental Care</h3>
-                      </div>
-                      <div className="h5-heading">
-                        <p>Dental Practice</p>
-                      </div>
-                      <div className="p-para">
-                        <p>
-                          “Nomad Nurses has exceeded our expectations. The
-                          platform's reliability in providing skilled nurses has
-                          been crucial for our practice's success. The time
-                          saved on administrative tasks, thanks to the efficient
-                          interface, allows us to focus more on patient care."
-                        </p>
-                      </div>
-                    </div>{" "}
-                    <div className="slider-item">
-                      <div className="h3-heading">
-                        <h3>The Witterings Dental Practice</h3>
-                      </div>
-                      <div className="h5-heading">
-                        <p>Dental Practice</p>
-                      </div>
-                      <div className="p-para">
-                        <p>
-                          “The Nomad Nurse platform has become an indispensable
-                          tool for our dental practice. Its user-friendly
-                          interface and advanced features simplify the
-                          recruitment process, allowing us to find qualified
-                          dental nurses swiftly. The efficiency and reliability
-                          of the platform make it an essential asset in managing
-                          our staffing needs."
-                        </p>
-                      </div>
-                    </div>{" "}
-                    <div className="slider-item">
-                      <div className="h3-heading">
-                        <h3>Dentistry @ Oceana Boulevard</h3>
-                      </div>
-                      <div className="h5-heading">
-                        <p>Dental Practice</p>
-                      </div>
-                      <div className="p-para">
-                        <p>
-                          “The platform's innovative approach to dental nurse
-                          recruitment ensures that we can access a diverse pool
-                          of skilled nurses with just a few clicks. It's a
-                          modern solution that has significantly improved our
-                          overall efficiency."
-                        </p>
-                      </div>
-                    </div>{" "}
-                  </Slider>
-                  <div className="custom-arrows">
-                    <div
-                      className={`custom-arrow custom-prev ${
-                        activeArrow === "prev" ? "active" : ""
-                      }`}
-                      onClick={handlePrev}
-                    >
-                      {">"}
-                    </div>
-                    <div
-                      className={`custom-arrow custom-next ${
-                        activeArrow === "next" ? "active" : ""
-                      }`}
-                      onClick={handleNext}
-                    >
-                      {"<"}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              style={{
-                // maxWidth: "1440px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                // alignSelf: "center",
-                // width: "100%",
-                // backgroundColor: "red",
-              }}
-            >
-              {/* <div className="line-contained3">
-                <img src={Line} alt="" />
-              </div> */}
-            </div>
-            {/* <div style={{ marginTop: "-1%" }}>
-              <Touch />
-            </div> */}
-            <div className="touch-container10">
-              <div className="touch-container-full">
-                <div
-                  className="touch-heading"
-                  data-aos="zoom-in"
-                  data-aos-duration="800"
-                >
-                  <h2>Get in touch</h2>
+                  <h2>About us</h2>
                 </div>
                 <div
-                  className="touch-img"
+                  className="story-img story-img-settingg"
                   data-aos="zoom-in"
                   data-aos-duration="800"
                 >
                   <img src={Vector} alt="" />
                 </div>
                 <div
-                  className="touch-para"
-                  data-aos="zoom-in"
-                  data-aos-duration="800"
+                  className="story-para"
+                  data-aos="fade-right"
+                  data-aos-offset="200"
+                  data-aos-duration="700"
                 >
-                  <p>Drop us a message to see how we can help you</p>
+                  <p>
+                    The inception of Nomad Nurses arose from our personal
+                    experiences within the dental profession. As practising
+                    dentists without a dedicated skilled nurse, we encountered
+                    difficulties in booking and securing nurses and we believe
+                    this is due to lack of access and visibility to practices
+                    seeking locum professionals.
+                  </p>
                 </div>
-                <div className="touch-container-contained">
+                <div
+                  className="story-para story-para-flex-set"
+                  data-aos="fade-left"
+                  data-aos-offset="200"
+                  data-aos-duration="700"
+                >
+                  <span>
+                    <p className="para-flux-set">
+                      We recognise the vital significance of this venture for
+                      the dental industry. Our objective is to resolve staffing
+                      predicaments by:
+                    </p>
+                    <span>
+                      <div className="container-about-flex-contained">
+                        <div className="img-about-set-flex  flex-img-container">
+                          <img src={golden} alt="" />{" "}
+                        </div>
+                        <div className="para-about-flexxxx">
+                          <p>
+                            streamlining the process of booking dental nurses
+                            for practices;
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="container-about-flex-contained">
+                        <div className="img-about-set-flex flex-img-container1">
+                          <img src={golden} alt="" />{" "}
+                        </div>
+                        <div className="para-about-flexxxx">
+                          <p>ensuring a seamless experience; and</p>
+                        </div>
+                      </div>
+                      <div className="container-about-flex-contained">
+                        <div className="img-about-set-flex flex-img-container1">
+                          <img src={golden} alt="" />{" "}
+                        </div>
+                        <div className="para-about-flexxxx">
+                          <p>
+                            enabling nurses to find opportunities all with the
+                            touch of a button.
+                          </p>
+                        </div>
+                      </div>
+                    </span>
+                  </span>
+                </div>
+                <div
+                  className="story-para"
+                  data-aos="fade-right"
+                  data-aos-offset="200"
+                  data-aos-duration="700"
+                >
+                  <p>
+                    Through the creation of our ground-breaking app and website,
+                    we successfully fill this gap by facilitating communication
+                    between locum nurses and dental practices all with the
+                    shared goal to minimise the disruption faced by dentists and
+                    patients.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex" style={{ overflow: "hidden" }}>
+              {/* <div className="testimonial-container">
+                <div className="testi-full-container">
                   <div
-                    className="left-touch"
-                    data-aos="fade-right"
-                    data-aos-offset="200"
-                    data-aos-duration="600"
+                    className="testi-heading"
+                    data-aos="zoom-in"
+                    data-aos-duration="800"
                   >
-                    <div className="left-section-content">
-                      <div className="left-section-content-container">
-                        <div className="le">
-                          <div className="le-image">
-                            <img src={Img22} alt="" />
-                          </div>
+                    <h2>Testimonials</h2>
+                  </div>
+                  <div
+                    className="testi-img"
+                    data-aos="zoom-in"
+                    data-aos-duration="800"
+                  >
+                    <img src={Img} alt="" />
+                  </div>
+                  <div
+                    className="testi-para"
+                    data-aos="zoom-in"
+                    data-aos-duration="800"
+                  >
+                    <p>Hear how others have found the Nomad Nurse experience</p>
+                  </div>
+                  <div className="slider-container">
+                    <Slider ref={(c) => setSlider(c)} {...settings}>
+                      <div className="slider-item">
+                        <div className="h3-heading">
+                          <h3>Yasmine</h3>
                         </div>
-                        <div className="re">
-                          <div className="re-heading">Office Address</div>
-                          <div className="re-para">
-                            Nomad Nurse, 4th Floor, Silverstream House, 45
-                            Fitzroy Street, Fitzrovia, London, W1T 6EB
-                          </div>
+                        <div className="h5-heading">
+                          <p>Locum Dental Nurse</p>
                         </div>
+                        <div className="p-para">
+                          <p>
+                            “The platform has given me access to a wide range of
+                            opportunities, and the process of securing positions
+                            is seamless. I appreciate the consistent support and
+                            the chance to work with various dental practices."
+                          </p>
+                        </div>
+                      </div>{" "}
+                      <div className="slider-item">
+                        <div className="h3-heading">
+                          <h3>Abigail</h3>
+                        </div>
+                        <div className="h5-heading">
+                          <p>Locum Dental Nurse</p>
+                        </div>
+                        <div className="p-para">
+                          <p>
+                            “Working through Nomad Nurse has been a fantastic
+                            experience. The platform is easy to navigate, and
+                            I've been able to find rewarding positions quickly.
+                            The reliability and professionalism of the company
+                            make it my go-to for locum opportunities."
+                          </p>
+                        </div>
+                      </div>{" "}
+                      <div className="slider-item">
+                        <div className="h3-heading">
+                          <h3>Lucy</h3>
+                        </div>
+                        <div className="h5-heading">
+                          <p>Locum Dental Nurse</p>
+                        </div>
+                        <div className="p-para">
+                          <p>
+                            “Nomad Nurses has simplified my job search process.
+                            The ease of using the app, has made finding locum
+                            positions a breeze. The variety of available
+                            opportunities make it a go-to platform for any
+                            dental nurse."
+                          </p>
+                        </div>
+                      </div>{" "}
+                      <div className="slider-item">
+                        <div className="h3-heading">
+                          <h3>Expert Dental Care</h3>
+                        </div>
+                        <div className="h5-heading">
+                          <p>Dental Practice</p>
+                        </div>
+                        <div className="p-para">
+                          <p>
+                            “Nomad Nurses has exceeded our expectations. The
+                            platform's reliability in providing skilled nurses
+                            has been crucial for our practice's success. The
+                            time saved on administrative tasks, thanks to the
+                            efficient interface, allows us to focus more on
+                            patient care."
+                          </p>
+                        </div>
+                      </div>{" "}
+                      <div className="slider-item">
+                        <div className="h3-heading">
+                          <h3>The Witterings Dental Practice</h3>
+                        </div>
+                        <div className="h5-heading">
+                          <p>Dental Practice</p>
+                        </div>
+                        <div className="p-para">
+                          <p>
+                            “The Nomad Nurse platform has become an
+                            indispensable tool for our dental practice. Its
+                            user-friendly interface and advanced features
+                            simplify the recruitment process, allowing us to
+                            find qualified dental nurses swiftly. The efficiency
+                            and reliability of the platform make it an essential
+                            asset in managing our staffing needs."
+                          </p>
+                        </div>
+                      </div>{" "}
+                      <div className="slider-item">
+                        <div className="h3-heading">
+                          <h3>Dentistry @ Oceana Boulevard</h3>
+                        </div>
+                        <div className="h5-heading">
+                          <p>Dental Practice</p>
+                        </div>
+                        <div className="p-para">
+                          <p>
+                            “The platform's innovative approach to dental nurse
+                            recruitment ensures that we can access a diverse
+                            pool of skilled nurses with just a few clicks. It's
+                            a modern solution that has significantly improved
+                            our overall efficiency."
+                          </p>
+                        </div>
+                      </div>{" "}
+                    </Slider>
+                    <div className="custom-arrows">
+                      <div
+                        className={`custom-arrow custom-prev ${
+                          activeArrow === "prev" ? "active" : ""
+                        }`}
+                        onClick={handlePrev}
+                      >
+                        {">"}
                       </div>
-                    </div>
-                    <div className="left-section-content">
-                      <div className="left-section-content-container">
-                        <div className="le">
-                          <div className="le-image">
-                            <img src={Img1} alt="" />
-                          </div>
-                        </div>
-                        <div className="re">
-                          <div className="re-heading">Email Address</div>
-                          <div className="re-para">info@nomadnurse.co.uk</div>
-                        </div>
-                      </div>
-                    </div>{" "}
-                    <div className="left-section-content">
-                      <div className="left-section-content-container">
-                        <div className="le">
-                          <div className="le-image">
-                            <img src={Img2} alt="" />
-                          </div>
-                        </div>
-                        <div className="re">
-                          <div className="re-heading">Phone Number</div>
-                          <div className="re-para">0204 538 6233</div>
-                        </div>
+                      <div
+                        className={`custom-arrow custom-next ${
+                          activeArrow === "next" ? "active" : ""
+                        }`}
+                        onClick={handleNext}
+                      >
+                        {"<"}
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="right-touch"
-                    data-aos="fade-left"
-                    data-aos-offset="200"
-                    data-aos-duration="600"
-                  >
-                    <div className="right-section-content">
-                      <div className="form-container" onSubmit={handleSubmit}>
-                        <div className="firstView">
-                          <div className="flex-container">
-                            <div className="flex-item">
-                              <label htmlFor="name">Name</label>
-                              <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                placeholder="Your name"
-                                value={formData.name}
-                                onChange={handleInputChange}
-                              />
-                            </div>
+                </div>
+              </div> */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              ></div>
 
-                            <div className="flex-item">
-                              <label htmlFor="role">Your Role</label>
-                              <div className="custom-select">
-                                <select
-                                  id="role"
-                                  name="role"
-                                  defaultValue=""
-                                  className="ddd"
-                                  value={formData.role}
-                                  onChange={handleInputChange}
-                                >
-                                  <option value="" disabled hidden>
-                                    Choose your role
-                                  </option>
-                                  <option value="role1">Dental Nurse</option>
-                                  <option value="role2">Dental Practice</option>
-                                  <option value="role3">
-                                    Dental Corporate
-                                  </option>
-                                </select>
-                              </div>
+              <div className="touch-container10">
+                <div className="touch-container-full">
+                  <div
+                    className="touch-heading"
+                    data-aos="zoom-in"
+                    data-aos-duration="800"
+                  >
+                    <h2>Get in touch</h2>
+                  </div>
+                  <div
+                    className="touch-img"
+                    data-aos="zoom-in"
+                    data-aos-duration="800"
+                  >
+                    <img src={Vector} alt="" />
+                  </div>
+                  <div
+                    className="touch-para"
+                    data-aos="zoom-in"
+                    data-aos-duration="800"
+                  >
+                    <p>Drop us a message to see how we can help you</p>
+                  </div>
+                  <div className="touch-container-contained">
+                    <div
+                      className="left-touch"
+                      data-aos="fade-right"
+                      data-aos-offset="200"
+                      data-aos-duration="600"
+                    >
+                      <div className="left-section-content">
+                        <div className="left-section-content-container">
+                          <div className="le">
+                            <div className="le-image">
+                              <img src={Img22} alt="" />
                             </div>
                           </div>
-                          <label htmlFor="email">Email</label>
-                          <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Your email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                          />
+                          <div className="re">
+                            <div className="re-heading">Office Address</div>
+                            <div className="re-para">
+                              Nomad Nurse, 4th Floor, Silverstream House, 45
+                              Fitzroy Street, London, W1T 6EB
+                            </div>
+                          </div>
                         </div>
-
-                        <div className="scndview">
-                          <>
+                      </div>
+                      <div className="left-section-content">
+                        <div className="left-section-content-container">
+                          <div className="le">
+                            <div className="le-image">
+                              <img src={Img1} alt="" />
+                            </div>
+                          </div>
+                          <div className="re">
+                            <div className="re-heading">Email Address</div>
+                            <div className="re-para">info@nomadnurse.co.uk</div>
+                          </div>
+                        </div>
+                      </div>{" "}
+                      <div className="left-section-content">
+                        <div className="left-section-content-container">
+                          <div className="le">
+                            <div className="le-image">
+                              <img src={Img2} alt="" />
+                            </div>
+                          </div>
+                          <div className="re">
+                            <div className="re-heading">Phone Number</div>
+                            <div className="re-para">020 4538 6233</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="right-touch"
+                      data-aos="fade-left"
+                      data-aos-offset="200"
+                      data-aos-duration="600"
+                    >
+                      <div className="right-section-content">
+                        <form
+                          className="form-container"
+                          onSubmit={handleSubmit}
+                        >
+                          <div className="firstView">
                             <div className="flex-container">
                               <div className="flex-item">
                                 <label htmlFor="name">Name</label>
@@ -670,130 +689,194 @@ export default function About() {
                                   onChange={handleInputChange}
                                 />
                               </div>
+
                               <div className="flex-item">
-                                <label htmlFor="email">Email</label>
-                                <input
-                                  type="email"
-                                  id="email"
-                                  name="email"
-                                  placeholder="Your email"
-                                  value={formData.email}
-                                  onChange={handleInputChange}
-                                />
+                                <label htmlFor="role">Your Role</label>
+                                <div className="custom-select">
+                                  <select
+                                    id="role"
+                                    name="role"
+                                    defaultValue=""
+                                    className="ddd"
+                                    value={formData.role}
+                                    onChange={handleInputChange}
+                                  >
+                                    <option value="" disabled hidden>
+                                      Choose your role
+                                    </option>
+                                    <option value="Dental Nurse">
+                                      Dental Nurse
+                                    </option>
+                                    <option value=" Independent Practice">
+                                      Independent Practice
+                                    </option>
+                                    <option value=" Dental Corporate">
+                                      Dental Corporate
+                                    </option>
+                                  </select>
+                                </div>
                               </div>
                             </div>
-                          </>
-
-                          <label htmlFor="role">Your Role</label>
-                          <div className="custom-select">
-                            <select
-                              id="role"
-                              name="role"
-                              defaultValue=""
-                              className="ddd"
-                              value={formData.role}
-                              onChange={handleInputChange}
-                            >
-                              <option value="" disabled hidden>
-                                Choose your role
-                              </option>
-                              <option value="role1">Dental Nurse</option>
-                              <option value="role2">Dental Practice</option>
-                              <option value="role3">Dental Corporate</option>
-                            </select>
-                          </div>
-                        </div>
-                        <label htmlFor="message">Message</label>
-                        <textarea
-                          id="message"
-                          name="message"
-                          placeholder="Write your message here"
-                          value={formData.message}
-                          onChange={handleInputChange}
-                        />
-                      </div>
-                      <div className="form-container">
-                        <div className="cccc">
-                          <div className="form-checkbox">
+                            <label htmlFor="email">Email</label>
                             <input
-                              type="checkbox"
-                              id="consentCheckbox"
-                              className="custom-checkbox"
-                              checked={formData.consent}
-                              onChange={handleCheckboxChange}
+                              type="email"
+                              id="email"
+                              name="email"
+                              placeholder="Your email"
+                              value={formData.email}
+                              onChange={handleInputChange}
                             />
                           </div>
-                          <div className="para-form1">
-                            <p>
-                              I consent to my personal data being stored and
-                              used in accordance with the{" "}
-                              <Link
-                                to="/privacy"
-                                onClick={scrollToTop}
-                                style={{ color: "#6b7280" }}
-                              >
-                                privacy policy.
-                              </Link>
-                            </p>
-                          </div>
-                        </div>
 
-                        <div
-                          className="form-button"
-                          type="submit"
-                          onClick={validateForm}
-                        >
-                          <button>Send Message</button>
-                        </div>
+                          <div className="scndview">
+                            <>
+                              <div className="flex-container">
+                                <div className="flex-item">
+                                  <label htmlFor="name">Name</label>
+                                  <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder="Your name"
+                                    value={formData.name}
+                                    onChange={handleInputChange}
+                                  />
+                                </div>
+                                <div className="flex-item">
+                                  <label htmlFor="email">Email</label>
+                                  <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Your email"
+                                    value={formData.email}
+                                    onChange={handleInputChange}
+                                  />
+                                </div>
+                              </div>
+                            </>
+
+                            <label htmlFor="role">Your Role</label>
+                            <div className="custom-select">
+                              <select
+                                id="role"
+                                name="role"
+                                defaultValue=""
+                                className="ddd"
+                                value={formData.role}
+                                onChange={handleInputChange}
+                              >
+                                <option value="" disabled hidden>
+                                  Choose your role
+                                </option>
+                                <option value="Dental Nurse">
+                                  Dental Nurse
+                                </option>
+                                <option value="Independent Practice">
+                                  Independent Practice
+                                </option>
+                                <option value="Dental Corporate">
+                                  Dental Corporate
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <label htmlFor="message">Message</label>
+                          <textarea
+                            id="message"
+                            name="message"
+                            placeholder="Write your message here"
+                            value={formData.message}
+                            onChange={handleInputChange}
+                          />
+
+                          {/* <div className="form-container"> */}
+                          <div className="cccc">
+                            <div className="form-checkbox">
+                              <input
+                                type="checkbox"
+                                id="consentCheckbox"
+                                className="custom-checkbox"
+                                checked={formData.consent}
+                                onChange={handleCheckboxChange}
+                              />
+                            </div>
+                            <div className="para-form1">
+                              <p>
+                                I consent to my personal data being stored and
+                                used in accordance with the{" "}
+                                <Link
+                                  to="/privacy"
+                                  onClick={scrollToTop}
+                                  style={{ color: "#6b7280" }}
+                                >
+                                  privacy policy.
+                                </Link>
+                              </p>
+                            </div>
+                          </div>
+
+                          <div
+                            className="form-button"
+                            type="submit"
+                            onClick={validateForm}
+                          >
+                            <button>Send Message</button>
+                          </div>
+                          {/* </div> */}
+                        </form>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="key-container">
-                  <img src={Line} alt="" />
-                </div>
-
-                <div className="whole-container-sb">
-                  <div className="whole-container-left">
-                    <Link
-                      to="/cookies"
-                      onClick={scrollToTop}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <div className="whole-items">Cookie Policy</div>
-                    </Link>
-                    <Link
-                      to="/privacy"
-                      onClick={scrollToTop}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <div className="whole-items">Privacy policy</div>
-                    </Link>
-                    <Link
-                      to="/terms&conditions"
-                      onClick={scrollToTop}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <div className="whole-items">Terms & conditions</div>
-                    </Link>
+                  <div className="key-container">
+                    <img src={Line} alt="" />
                   </div>
 
-                  <div className="whole-container-right">
-                    <a href="  https://www.facebook.com/nomadnurseuk">
-                      <img src={Face} alt="Face" />
-                    </a>
+                  <div className="whole-container-sb">
+                    <div className="whole-container-left">
+                      <Link
+                        to="/cookies"
+                        onClick={scrollToTop}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <div className="whole-items">Cookie Policy</div>
+                      </Link>
+                      <Link
+                        to="/privacy"
+                        onClick={scrollToTop}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <div className="whole-items">Privacy policy</div>
+                      </Link>
+                      <Link
+                        to="/terms&conditions"
+                        onClick={scrollToTop}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <div className="whole-items">Terms & conditions</div>
+                      </Link>
+                    </div>
 
-                    <a href="https://www.instagram.com/nomadnurseuk/">
-                      <img src={Insta} alt="Instagram" />
-                    </a>
+                    <div className="whole-container-right">
+                      <a href="  https://www.facebook.com/nomadnurseuk">
+                        <img src={Face} alt="Face" />
+                      </a>
 
-                    <a>
-                      <img src={Link1} alt="Din" />
-                    </a>
+                      <a href="https://www.instagram.com/nomadnurseuk/">
+                        <img src={Insta} alt="Instagram" />
+                      </a>
+
+                      <a>
+                        <img src={Link1} alt="Din" />
+                      </a>
+                    </div>
                   </div>
-                </div>
-                <div className="title-container1">
-                  <h2>© 2023 Nomad Nurse Ltd. All rights reserved.</h2>
+                  <div className="title-container1">
+                    <h2>
+                      © {currentYear} Nomad Nurse Ltd. All rights reserved.
+                    </h2>
+                  </div>
                 </div>
               </div>
             </div>

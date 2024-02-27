@@ -104,7 +104,7 @@ const dataNurse = {
     },
     {
       title: "What happens if the practice cancels on me?",
-      content: `If the clinic cancels within 48hrs you will get paid 50% of that shift. If the practice cancels within 24hs you will get paid for the full shift.`,
+      content: `If the clinic cancels within a certain timeframe you will be reimbursed.`,
     },
   ],
 };
@@ -184,7 +184,7 @@ const dataPractice = {
     },
     {
       title:
-        "Can dental practices customize their job listings on your platform?",
+        "Can dental practices customise their job listings on your platform?",
       content: `Yes.`,
     },
     {
