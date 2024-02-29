@@ -16,7 +16,11 @@ const mg = mailgun({ apiKey: API_KEY, domain: DOMAIN });
 
 app.post("/nomad/send-email", (req, res) => {
   const { to, subject, text } = req.body;
-
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   const data = {
     from: "haseebqureshi77786@gmail.com",
     to,
